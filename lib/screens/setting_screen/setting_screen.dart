@@ -148,8 +148,9 @@ class SettingScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
+            width: 48,
+            height: 48,
             padding: const EdgeInsets.all(20),
-            clipBehavior: Clip.antiAlias,
             decoration: ShapeDecoration(
               image: DecorationImage(
                 image: NetworkImage(
