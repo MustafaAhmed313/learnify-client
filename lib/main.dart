@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:learnify_client/screens/setting_screen/setting_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +18,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      home: SettingScreen(),
 
     );
   }
