@@ -8,6 +8,10 @@ void main() {
   runApp(const MyApp());
 }
 
+void mostafa() {
+  
+}
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
