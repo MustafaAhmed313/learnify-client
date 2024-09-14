@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
 
 class HelpCenterScreen extends StatefulWidget {
   const HelpCenterScreen({super.key});
@@ -10,256 +12,250 @@ class HelpCenterScreen extends StatefulWidget {
   _HelpCenterScreenState createState() => _HelpCenterScreenState();
 }
 
-class _HelpCenterScreenState extends State<HelpCenterScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this); 
-  }
-
+class _HelpCenterScreenState extends State<HelpCenterScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Help Center',
-          style: TextStyle(
-            color: Color(0xFF030303),
-            fontSize: 20,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(60),
-          
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    _tabController.animateTo(0);
-                    setState(() {});
-                  },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'FAQ',
-                        style: TextStyle(
-                          color: _tabController.index == 0
-                              ? Kcolor.mainColor
-                              : Color(0xFF92929D),
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                        ),
+    return BlocBuilder<HelpCenterCubit, HelpCenterState>(
+      builder: (context, state) {
+        final cubit = context.read<HelpCenterCubit>();
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Help Center',
+              style: TextStyle(
+                color: Color(0xFF030303),
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(60),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        cubit.animatedToTab(0);
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'FAQ',
+                            style: TextStyle(
+                              color: cubit.tabController.index == 0
+                                  ? Kcolor.mainColor
+                                  : Color(0xFF92929D),
+                              fontSize: 16,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 2,
+                            width: 170,
+                            color: cubit.tabController.index == 0
+                                ? Kcolor.mainColor
+                                : Color(0xFF92929D),
+                          )
+                        ],
                       ),
-                      SizedBox(
-                        height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        cubit.animatedToTab(1);
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Contact us',
+                            style: TextStyle(
+                              color: cubit.tabController.index == 1
+                                  ? Kcolor.mainColor
+                                  : Color(0xFF92929D),
+                              fontSize: 16,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 2,
+                            width: 179,
+                            color: cubit.tabController.index == 1
+                                ? Kcolor.mainColor
+                                : Color(0xFF92929D),
+                          )
+                        ],
                       ),
-                      Container(
-                        height: 2,
-                        width: 170,
-                        color: _tabController.index == 0
-                            ? Kcolor.mainColor
-                            : Color(0xFF92929D),
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    _tabController.animateTo(1);
-                    setState(() {}); 
-                  },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Contact us',
-                        style: TextStyle(
-                          color: _tabController.index == 1
-                              ? Kcolor.mainColor
-                              : Color(0xFF92929D),
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        height: 2,
-                        width: 179,
-                        color: _tabController.index == 1
-                            ? Kcolor.mainColor
-                            : Color(0xFF92929D),
-                      )
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 96,
-                        height: 40,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        decoration: ShapeDecoration(
-                          color: Color(0xFF056AFF),
-                          shape: RoundedRectangleBorder(
-                            side:
-                                BorderSide(width: 1, color: Color(0xFF056AFF)),
-                            borderRadius: BorderRadius.circular(32),
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'General',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Container(
-                        width: 96,
-                        height: 40,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        decoration: ShapeDecoration(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            side:
-                                BorderSide(width: 1, color: Color(0xFF056AFF)),
-                            borderRadius: BorderRadius.circular(32),
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Service',
-                            style: TextStyle(
+          body: TabBarView(
+            controller: cubit.tabController,
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20, left: 20),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 96,
+                            height: 40,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: ShapeDecoration(
                               color: Color(0xFF056AFF),
-                              fontSize: 16,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    width: 1, color: Color(0xFF056AFF)),
+                                borderRadius: BorderRadius.circular(32),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 48,
-                        width: 323,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            fillColor: Colors.white,
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8),
-                                    bottomLeft: Radius.circular(8)),
-                                borderSide: BorderSide.none),
-                            label: Text(
-                              "Search",
-                              style: TextStyle(
-                                color: Colors.grey,
+                            child: Center(
+                              child: Text(
+                                'General',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          Container(
+                            width: 96,
+                            height: 40,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: ShapeDecoration(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    width: 1, color: Color(0xFF056AFF)),
+                                borderRadius: BorderRadius.circular(32),
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Service',
+                                style: TextStyle(
+                                  color: Color(0xFF056AFF),
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      Spacer(),
-                      Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                            color: Color(0xFF056AFF),
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(8),
-                                bottomRight: Radius.circular(8))),
-                        child: Icon(
-                          Icons.mic_none_outlined,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Column(
-                  children: [
-                    _faq(),
-                    _faq(),
-                    _faq(),
-                    _faq(),
-                    _faq(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 48,
+                            width: 323,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(8),
+                                        bottomLeft: Radius.circular(8)),
+                                    borderSide: BorderSide.none),
+                                label: Text(
+                                  "Search",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                                color: Color(0xFF056AFF),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(8),
+                                    bottomRight: Radius.circular(8))),
+                            child: Icon(
+                              Icons.mic_none_outlined,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        _faq(),
+                        _faq(),
+                        _faq(),
+                        _faq(),
+                        _faq(),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-          ),
+                ),
+              ),
 
-          Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              _contactContent(Icons.headphones_outlined, 'Customer Service'),
-              SizedBox(
-                height: 25,
-              ),
-              _contactContent(FontAwesomeIcons.whatsapp, 'WhatsApp'),
-              SizedBox(
-                height: 25,
-              ),
-              _contactContent(Icons.language, 'Website'),
-              SizedBox(
-                height: 25,
-              ),
-              _contactContent(FontAwesomeIcons.facebook, 'Facebook'),
-              SizedBox(
-                height: 25,
-              ),
-              _contactContent(FontAwesomeIcons.instagram, 'Instagram'),
-              SizedBox(
-                height: 25,
-              ),
-              _contactContent(FontAwesomeIcons.twitter, 'Twitter'),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _contactContent(
+                      Icons.headphones_outlined, 'Customer Service'),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  _contactContent(FontAwesomeIcons.whatsapp, 'WhatsApp'),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  _contactContent(Icons.language, 'Website'),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  _contactContent(FontAwesomeIcons.facebook, 'Facebook'),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  _contactContent(FontAwesomeIcons.instagram, 'Instagram'),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  _contactContent(FontAwesomeIcons.twitter, 'Twitter'),
+                ],
+              ), // Replace with Contact Us content
             ],
-          ), // Replace with Contact Us content
-        ],
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -267,7 +263,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen>
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Container(
-        width: 380,
+        width: 375,
         decoration: BoxDecoration(
           color: Color(0xFFFCFCFC),
           borderRadius: BorderRadius.circular(10),
@@ -294,8 +290,8 @@ class _HelpCenterScreenState extends State<HelpCenterScreen>
               Divider(
                 indent: 20,
                 endIndent: 20,
-                color: Color(0xFF92929D), 
-                thickness: 1, 
+                color: Color(0xFF92929D),
+                thickness: 1,
               ),
               Padding(
                 padding:
@@ -315,8 +311,8 @@ class _HelpCenterScreenState extends State<HelpCenterScreen>
               size: 30,
               color: Kcolor.mainColor,
             ),
-            iconColor: Kcolor.mainColor, 
-            collapsedIconColor: Kcolor.mainColor, 
+            iconColor: Kcolor.mainColor,
+            collapsedIconColor: Kcolor.mainColor,
           ),
         ),
       ),
