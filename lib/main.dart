@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/setting_screen.dart';
 
@@ -15,11 +16,19 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SwitchCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SwitchCubit(),
+        ),
+        BlocProvider(
+          // Pass `this` as the TickerProvider to HelpCenterCubit
+          create: (context) => HelpCenterCubit(this),
+        ),
+      ],
       child: const GetMaterialApp(
         debugShowCheckedModeBanner: false,
         home: SettingScreen(),
