@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
+import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/setting_screen.dart';
 
@@ -27,6 +28,9 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         BlocProvider(
           // Pass `this` as the TickerProvider to HelpCenterCubit
           create: (context) => HelpCenterCubit(this),
+        ),
+        BlocProvider(
+          create: (context) => SettingContentCubit(),
         ),
       ],
       child: const GetMaterialApp(
