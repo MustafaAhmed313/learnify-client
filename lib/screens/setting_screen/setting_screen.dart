@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/screens/help_center/help_center_screen.dart';
+import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/models/setting_models.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -50,8 +53,8 @@ class SettingScreen extends StatelessWidget {
             child: ListView.separated(
               itemBuilder: (c, i) => _settingBody(settingModels[i]),
               separatorBuilder: (c, i) => Divider(
-                indent: 20,
-                endIndent: 20,
+                indent: 25,
+                endIndent: 25,
               ),
               itemCount: settingModels.length,
             ),
@@ -63,79 +66,92 @@ class SettingScreen extends StatelessWidget {
 
   Padding _settingBody(SettingModels model) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: Container(
-        width: 354,
-        height: 70,
-        child: Row(
-          children: [
-            Container(
-              width: 48,
-              height: 48,
-              padding: const EdgeInsets.all(12),
-              decoration: ShapeDecoration(
-                color: Color(0x19056AFF),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
-              ),
-              child: Icon(
-                model.icon,
-                color: Kcolor.mainColor,
+      padding: const EdgeInsets.only(left: 25, right: 25),
+      child: BlocBuilder<SwitchCubit, SwitchState>(
+        builder: (context, state) {
+          final cubit = context.read<SwitchCubit>();
+          return GestureDetector(
+            onTap: () {
+              if (model.name == 'Help Center') {
+                Get.to(HelpCenterScreen());
+              }
+            },
+            child: Container(
+              width: 354,
+              height: 70,
+              child: Row(
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    padding: const EdgeInsets.all(12),
+                    decoration: ShapeDecoration(
+                      color: Color(0x19056AFF),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                    ),
+                    child: Icon(
+                      model.icon,
+                      color: Kcolor.mainColor,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    model.name!,
+                    style: TextStyle(
+                      color: Color(0xFF030303),
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Spacer(),
+                  if (model.optionalName != null &&
+                      model.optionalName!.isNotEmpty)
+                    Text(
+                      model.optionalName ?? "",
+                      style: TextStyle(
+                        color: Color(0xFF92929D),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                        height: 0,
+                      ),
+                    ),
+                  SizedBox(
+                    width: 7,
+                  ),
+                  if (model.name == "Dark Mode")
+                    CupertinoSwitch(
+                      value: model.isSwitched ?? false,
+                      activeColor: Colors.blue,
+                      trackColor: Colors.grey,
+                      onChanged: (bool value) {
+                        cubit.changeSwitch(model, value);
+                      },
+                    )
+                  else
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Kcolor.mainColor,
+                      size: 20,
+                    )
+                ],
               ),
             ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              model.name!,
-              style: TextStyle(
-                color: Color(0xFF030303),
-                fontSize: 16,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Spacer(),
-            if (model.optionalName != null && model.optionalName!.isNotEmpty)
-              Text(
-                model.optionalName ?? "",
-                style: TextStyle(
-                  color: Color(0xFF92929D),
-                  fontSize: 16,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
-                  height: 0,
-                ),
-              ),
-            SizedBox(
-              width: 7,
-            ),
-            if (model.name == "Dark Mode")
-              CupertinoSwitch(
-                value: model.isSwitched ?? false,
-                activeColor: Colors.blue,
-                trackColor: Colors.grey,
-                onChanged: (bool value) {
-                  model.isSwitched = value;
-                },
-              )
-            else
-              Icon(
-                Icons.arrow_forward_ios,
-                color: Kcolor.mainColor,
-                size: 20,
-              )
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 
   Container _personInfo() {
     return Container(
-      width: 354,
+      width: 370,
       height: 74,
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(13),
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 1, color: Color(0xFF92929D)),
