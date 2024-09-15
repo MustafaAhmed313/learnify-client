@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
 import 'package:learnify_client/screens/help_center/help_center_screen.dart';
+import 'package:learnify_client/screens/setting_content/setting_content_screen.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/models/setting_models.dart';
 
@@ -74,6 +75,8 @@ class SettingScreen extends StatelessWidget {
             onTap: () {
               if (model.name == 'Help Center') {
                 Get.to(HelpCenterScreen());
+              } else if (model.name == 'Setting') {
+                Get.to(SettingContentScreen());
               }
             },
             child: Container(
@@ -124,13 +127,16 @@ class SettingScreen extends StatelessWidget {
                     width: 7,
                   ),
                   if (model.name == "Dark Mode")
-                    CupertinoSwitch(
-                      value: model.isSwitched ?? false,
-                      activeColor: Colors.blue,
-                      trackColor: Colors.grey,
-                      onChanged: (bool value) {
-                        cubit.changeSwitch(model, value);
-                      },
+                    Transform.scale(
+                      scale: 0.8,
+                      child: CupertinoSwitch(
+                        value: model.isSwitched ?? false,
+                        activeColor: Colors.blue,
+                        trackColor: Colors.grey,
+                        onChanged: (bool value) {
+                          cubit.changeSwitch(model, value);
+                        },
+                      ),
                     )
                   else
                     Icon(
