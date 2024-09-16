@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           create: (context) => SwitchCubit(),
         ),
         BlocProvider(
-          // Pass `this` as the TickerProvider to HelpCenterCubit
+          
           create: (context) => HelpCenterCubit(this),
         ),
         BlocProvider(

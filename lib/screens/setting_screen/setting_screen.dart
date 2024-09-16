@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/screens/edit_screen/edit_profile.dart';
 import 'package:learnify_client/screens/help_center/help_center_screen.dart';
 import 'package:learnify_client/screens/setting_content/setting_content_screen.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
@@ -77,6 +78,8 @@ class SettingScreen extends StatelessWidget {
                 Get.to(HelpCenterScreen());
               } else if (model.name == 'Setting') {
                 Get.to(SettingContentScreen());
+              } else if (model.name == 'Edit Profile') {
+                Get.to(EditProfile());
               }
             },
             child: Container(
