@@ -14,8 +14,6 @@ class NewPassword extends StatefulWidget {
 }
 
 class _NewPasswordState extends State<NewPassword> {
-
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ValidatePasswordCubit, ValidatePasswordState>(
@@ -265,7 +263,7 @@ class _NewPasswordState extends State<NewPassword> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0, top: 130),
+                  padding: const EdgeInsets.only(bottom: 20.0, top: 140),
                   child: Container(
                     width: 370,
                     height: 48,
