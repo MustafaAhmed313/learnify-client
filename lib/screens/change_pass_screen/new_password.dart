@@ -275,6 +275,7 @@ class _NewPasswordState extends State<NewPassword> {
                           return BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
                             child: AlertDialog(
+                              backgroundColor: Color(0xFFFCFCFC),
                               content: _buildAlertDialog(),
                             ),
                           );
@@ -335,35 +336,41 @@ class _NewPasswordState extends State<NewPassword> {
           SizedBox(
             height: 20,
           ),
-          Row(
-            children: [
-              Text(
-                'Congratulation! ',
-                style: TextStyle(
-                  color: Color(0xFF056AFF),
-                  fontSize: 18,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
+          Padding(
+            padding: const EdgeInsets.only(left: 13.0),
+            child: Row(
+              children: [
+                Text(
+                  'Congratulation! ',
+                  style: TextStyle(
+                    color: Color(0xFF056AFF),
+                    fontSize: 18,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              Text(
-                'your password',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
-                ),
-              )
-            ],
+                Text(
+                  'your password',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                  ),
+                )
+              ],
+            ),
           ),
-          Text(
-            'has been changed',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w600,
+          Padding(
+            padding: const EdgeInsets.only(left: 3.0),
+            child: Text(
+              'has been changed',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           SizedBox(
