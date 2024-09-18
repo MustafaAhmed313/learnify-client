@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
 import 'package:learnify_client/screens/change_pass_screen/cubit/validate_password_cubit.dart';
 
@@ -264,23 +267,38 @@ class _NewPasswordState extends State<NewPassword> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20.0, top: 140),
-                  child: Container(
-                    width: 370,
-                    height: 48,
-                    decoration: ShapeDecoration(
-                      color: Color(0xFF056AFF),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                  child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
+                            child: AlertDialog(
+                              content: _buildAlertDialog(),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      width: 370,
+                      height: 48,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF056AFF),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Update',
-                        style: TextStyle(
-                          color: Color(0xFFFCFCFC),
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w600,
+                      child: Center(
+                        child: Text(
+                          'Update',
+                          style: TextStyle(
+                            color: Color(0xFFFCFCFC),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
@@ -291,6 +309,105 @@ class _NewPasswordState extends State<NewPassword> {
           ),
         );
       },
+    );
+  }
+
+  Container _buildAlertDialog() {
+    return Container(
+      width: 360,
+      height: 340,
+      clipBehavior: Clip.antiAlias,
+      decoration: ShapeDecoration(
+        color: Color(0xFFFCFCFC),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Image.asset(
+              'assets/images/tick 1.png',
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Text(
+                'Congratulation! ',
+                style: TextStyle(
+                  color: Color(0xFF056AFF),
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                'your password',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
+                ),
+              )
+            ],
+          ),
+          Text(
+            'has been changed',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: Text(
+              textAlign: TextAlign.center,
+              'Try to keep the password away to avoid theft of your account and data',
+              style: TextStyle(
+                color: Color(0xFF92929D),
+                fontSize: 14,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Container(
+              width: 262,
+              height: 48,
+              decoration: ShapeDecoration(
+                color: Color(0xFF056AFF),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+              ),
+              child: Center(
+                child: Text(
+                  'Next',
+                  style: TextStyle(
+                    color: Color(0xFFFCFCFC),
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
