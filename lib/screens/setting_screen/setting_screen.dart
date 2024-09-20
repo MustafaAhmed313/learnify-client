@@ -15,55 +15,77 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 20),
-            child: Container(
-              width: 390,
-              height: 54,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Color(0xFF92929D),
-                    radius: 15.0,
+    return BlocBuilder<SwitchCubit, SwitchState>(
+      builder: (context, state) {
+        final cubit = context.read<SwitchCubit>();
+        return Scaffold(
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 50, left: 20, right: 20, bottom: 20),
+                child: Container(
+                  width: 390,
+                  height: 54,
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Color(0xFF92929D),
+                        radius: 15.0,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      if (!cubit.isSearching)
+                        Text(
+                          "Account",
+                          style: TextStyle(
+                            color: Color(0xFF030303),
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                      else
+                        Expanded(
+                          child: TextField(
+                            controller: cubit.searchController,
+                            onChanged: cubit.filteredSearchResults,
+                            decoration: InputDecoration(
+                              hintText: "Search...",
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          cubit.searchBoutton();
+                        },
+                        child: Icon(
+                          cubit.isSearching ? Icons.close : Icons.search,
+                          size: 30,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Account",
-                    style: TextStyle(
-                      color: Color(0xFF030303),
-                      fontSize: 20,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Spacer(),
-                  Icon(
-                    Icons.search,
-                    size: 30,
-                  ),
-                ],
+                ),
               ),
-            ),
+              _personInfo(),
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (c, i) => _settingBody(cubit.filteredSetting[i]),
+                  separatorBuilder: (c, i) => Divider(
+                    indent: 25,
+                    endIndent: 25,
+                  ),
+                  itemCount: cubit.filteredSetting.length,
+                ),
+              )
+            ],
           ),
-          _personInfo(),
-          Expanded(
-            child: ListView.separated(
-              itemBuilder: (c, i) => _settingBody(settingModels[i]),
-              separatorBuilder: (c, i) => Divider(
-                indent: 25,
-                endIndent: 25,
-              ),
-              itemCount: settingModels.length,
-            ),
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -162,7 +184,7 @@ class SettingScreen extends StatelessWidget {
   Container _personInfo() {
     return Container(
       width: 370,
-      height: 74,
+      height: 80,
       padding: const EdgeInsets.all(13),
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
