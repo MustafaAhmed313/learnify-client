@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/screens/about_us_screen/about_us.dart';
+import 'package:learnify_client/screens/manage_notification_screen/manage_notification.dart';
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_content/models/setting_content_model.dart';
+import 'package:learnify_client/screens/setting_content/widget/rate_dialog.dart';
 
 class SettingContentScreen extends StatelessWidget {
   const SettingContentScreen({super.key});
@@ -55,72 +59,88 @@ class SettingContentScreen extends StatelessWidget {
       child: BlocBuilder<SettingContentCubit, SettingContentState>(
         builder: (context, state) {
           final cubit = context.read<SettingContentCubit>();
-          return Container(
-            width: 354,
-            height: 70,
-            child: Row(
-              children: [
-                Container(
-                  width: 48,
-                  height: 48,
-                  padding: const EdgeInsets.all(12),
-                  decoration: ShapeDecoration(
-                    color: Color(0x19056AFF),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
+          return GestureDetector(
+            onTap: () {
+              if (model.name == 'Rate US') {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return RateDialog();
+                  },
+                );
+              } else if (model.name == 'About US') {
+                Get.to(AboutUs());
+              } else if (model.name == 'Manage Notification') {
+                Get.to(ManageNotification());
+              }
+            },
+            child: Container(
+              width: 354,
+              height: 70,
+              child: Row(
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    padding: const EdgeInsets.all(12),
+                    decoration: ShapeDecoration(
+                      color: Color(0x19056AFF),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                    ),
+                    child: Icon(
+                      model.icon,
+                      color: Kcolor.mainColor,
+                    ),
                   ),
-                  child: Icon(
-                    model.icon,
-                    color: Kcolor.mainColor,
+                  SizedBox(
+                    width: 10,
                   ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  model.name!,
-                  style: TextStyle(
-                    color: Color(0xFF030303),
-                    fontSize: 16,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Spacer(),
-                if (model.optionalName != null &&
-                    model.optionalName!.isNotEmpty)
                   Text(
-                    model.optionalName ?? "",
+                    model.name!,
                     style: TextStyle(
-                      color: Color(0xFF92929D),
+                      color: Color(0xFF030303),
                       fontSize: 16,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
-                      height: 0,
                     ),
                   ),
-                SizedBox(
-                  width: 7,
-                ),
-                if (model.name == "TalkBack")
-                  Transform.scale(
-                    scale: 0.8,
-                    child: CupertinoSwitch(
-                      value: model.isSwitched ?? false,
-                      activeColor: Colors.blue,
-                      trackColor: Colors.grey,
-                      onChanged: (bool value) {
-                        cubit.talkBackSwitch(model, value);
-                      },
+                  Spacer(),
+                  if (model.optionalName != null &&
+                      model.optionalName!.isNotEmpty)
+                    Text(
+                      model.optionalName ?? "",
+                      style: TextStyle(
+                        color: Color(0xFF92929D),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                        height: 0,
+                      ),
                     ),
-                  )
-                else
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Kcolor.mainColor,
-                    size: 20,
-                  )
-              ],
+                  SizedBox(
+                    width: 7,
+                  ),
+                  if (model.name == "TalkBack")
+                    Transform.scale(
+                      scale: 0.8,
+                      child: CupertinoSwitch(
+                        value: model.isSwitched ?? false,
+                        activeColor: Colors.blue,
+                        trackColor: Colors.grey,
+                        onChanged: (bool value) {
+                          cubit.talkBackSwitch(model, value);
+                        },
+                      ),
+                    )
+                  else
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Kcolor.mainColor,
+                      size: 20,
+                    )
+                ],
+              ),
             ),
           );
         },
@@ -147,16 +167,16 @@ class SettingContentScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(22),
               clipBehavior: Clip.antiAlias,
               decoration: ShapeDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
                       "https://th.bing.com/th/id/OIP.ARKjkmC8CHiN18CdgXJ9ngHaHa?rs=1&pid=ImgDetMain"),
-                  fit: BoxFit.fill,
                 ),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
             SizedBox(width: 12),

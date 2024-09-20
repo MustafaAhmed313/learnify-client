@@ -176,13 +176,12 @@ class SettingScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(22),
             clipBehavior: Clip.antiAlias,
             decoration: ShapeDecoration(
               image: DecorationImage(
                 image: NetworkImage(
                     "https://th.bing.com/th/id/OIP.ARKjkmC8CHiN18CdgXJ9ngHaHa?rs=1&pid=ImgDetMain"),
-                fit: BoxFit.fill,
               ),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
