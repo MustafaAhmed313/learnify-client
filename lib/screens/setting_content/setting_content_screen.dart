@@ -14,42 +14,61 @@ class SettingContentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Setting',
-          style: TextStyle(
-            color: Color(0xFF030303),
-            fontSize: 20,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 22),
-            child: Icon(
-              Icons.search,
-              size: 30,
-            ),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          _personInfo(),
-          Expanded(
-            child: ListView.separated(
-              itemBuilder: (c, i) => _settingBody(settingContentModel[i]),
-              separatorBuilder: (c, i) => Divider(
-                indent: 25,
-                endIndent: 25,
+    return BlocBuilder<SettingContentCubit, SettingContentState>(
+      builder: (context, state) {
+        final cubit = context.read<SettingContentCubit>();
+        return Scaffold(
+          appBar: AppBar(
+            title: !cubit.isSearching
+                ? Text(
+                    'Setting',
+                    style: TextStyle(
+                      color: Color(0xFF030303),
+                      fontSize: 20,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                : TextField(
+                    controller: cubit.searchController,
+                    onChanged: cubit.filteredSearchResults,
+                    decoration: InputDecoration(
+                      hintText: "Search...",
+                      border: InputBorder.none,
+                    ),
+                  ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 22),
+                child: GestureDetector(
+                  onTap: () {
+                    cubit.searchButton();
+                  },
+                  child: Icon(
+                    cubit.isSearching ? Icons.close : Icons.search,
+                    size: 30,
+                  ),
+                ),
               ),
-              itemCount: settingContentModel.length,
-            ),
-          )
-        ],
-      ),
+            ],
+          ),
+          body: Column(
+            children: [
+              _personInfo(),
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (c, i) => _settingBody(cubit.filteredSetting[i]),
+                  separatorBuilder: (c, i) => Divider(
+                    indent: 25,
+                    endIndent: 25,
+                  ),
+                  itemCount: cubit.filteredSetting.length,
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 
