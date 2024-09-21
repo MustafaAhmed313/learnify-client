@@ -74,6 +74,7 @@ class SettingScreen extends StatelessWidget {
               _personInfo(),
               Expanded(
                 child: ListView.separated(
+                  padding: EdgeInsets.only(top: 10),
                   itemBuilder: (c, i) => _settingBody(cubit.filteredSetting[i]),
                   separatorBuilder: (c, i) => Divider(
                     indent: 25,

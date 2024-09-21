@@ -57,6 +57,7 @@ class SettingContentScreen extends StatelessWidget {
               _personInfo(),
               Expanded(
                 child: ListView.separated(
+                  padding: EdgeInsets.only(top: 10),
                   itemBuilder: (c, i) => _settingBody(cubit.filteredSetting[i]),
                   separatorBuilder: (c, i) => Divider(
                     indent: 25,
@@ -172,7 +173,7 @@ class SettingContentScreen extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
       child: Container(
         width: 370,
-        height: 74,
+        height: 80,
         padding: const EdgeInsets.all(13),
         decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
