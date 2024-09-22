@@ -23,7 +23,6 @@ class SettingContentScreen extends StatelessWidget {
                 ? Text(
                     'Setting',
                     style: TextStyle(
-                      color: Color(0xFF030303),
                       fontSize: 20,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
@@ -119,7 +118,6 @@ class SettingContentScreen extends StatelessWidget {
                   Text(
                     model.name!,
                     style: TextStyle(
-                      color: Color(0xFF030303),
                       fontSize: 16,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
@@ -229,7 +227,6 @@ class SettingContentScreen extends StatelessWidget {
                       child: Text(
                         'Ahmed',
                         style: TextStyle(
-                          color: Color(0xFF030303),
                           fontSize: 16,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w600,

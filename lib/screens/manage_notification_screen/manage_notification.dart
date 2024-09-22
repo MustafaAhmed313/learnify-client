@@ -18,7 +18,6 @@ class _ManageNotificationState extends State<ManageNotification> {
         title: Text(
           'Manage Notification',
           style: TextStyle(
-            color: Color(0xFF030303),
             fontSize: 20,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w500,
@@ -70,7 +69,6 @@ class _ManageNotificationState extends State<ManageNotification> {
             Text(
               model.name!,
               style: TextStyle(
-                color: Color(0xFF030303),
                 fontSize: 16,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,

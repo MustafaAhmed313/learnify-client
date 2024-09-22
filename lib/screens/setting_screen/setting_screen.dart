@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:learnify_client/const/kcolor.dart';
 import 'package:learnify_client/screens/change_pass_screen/change_password.dart';
 import 'package:learnify_client/screens/edit_screen/edit_profile.dart';
@@ -40,7 +41,6 @@ class SettingScreen extends StatelessWidget {
                         Text(
                           "Account",
                           style: TextStyle(
-                            color: Color(0xFF030303),
                             fontSize: 20,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w500,
@@ -133,7 +133,6 @@ class SettingScreen extends StatelessWidget {
                   Text(
                     model.name!,
                     style: TextStyle(
-                      color: Color(0xFF030303),
                       fontSize: 16,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
@@ -159,13 +158,15 @@ class SettingScreen extends StatelessWidget {
                     Transform.scale(
                       scale: 0.8,
                       child: CupertinoSwitch(
-                        value: model.isSwitched ?? false,
+                        value: cubit.isDarkMode,
+                        
                         activeColor: Colors.blue,
                         trackColor: Colors.grey,
                         onChanged: (bool value) {
                           cubit.changeSwitch(model, value);
                         },
                       ),
+                      
                     )
                   else
                     Icon(
@@ -240,7 +241,6 @@ class SettingScreen extends StatelessWidget {
                     child: Text(
                       'Ahmed',
                       style: TextStyle(
-                        color: Color(0xFF030303),
                         fontSize: 16,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w600,

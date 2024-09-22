@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:learnify_client/screens/setting_screen/models/setting_models.dart';
 import 'package:meta/meta.dart';
 
@@ -11,9 +12,10 @@ class SwitchCubit extends Cubit<SwitchState> {
     searchController.addListener(() {
       filteredSearchResults(searchController.text);
     });
+    isDarkMode = Hive.box('darkModeTutorial').get('key', defaultValue: false);
   }
   bool isSearching = false;
-
+  bool isDarkMode = false;
   TextEditingController searchController = TextEditingController();
   List<SettingModels> filteredSetting = [];
 
@@ -41,6 +43,15 @@ class SwitchCubit extends Cubit<SwitchState> {
 
   void changeSwitch(SettingModels model, bool value) {
     model.isSwitched = value;
+    if (model.name == "Dark Mode") {
+      isDarkMode = value;
+      Hive.box('darkModeTutorial').put('key', isDarkMode);
+    }
     emit(ChangeSwitch());
+  }
+
+  bool getDarkMode() {
+    return isDarkMode =
+        Hive.box('darkModeTutorial').get('key', defaultValue: false);
   }
 }

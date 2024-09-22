@@ -23,7 +23,6 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
             title: Text(
               'Help Center',
               style: TextStyle(
-                color: Color(0xFF030303),
                 fontSize: 20,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
@@ -177,6 +176,10 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                             width: 323,
                             child: TextField(
                               decoration: InputDecoration(
+                                hintText: 'Search',
+                                hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                ),
                                 fillColor: Colors.white,
                                 filled: true,
                                 border: OutlineInputBorder(
@@ -184,12 +187,6 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                                         topLeft: Radius.circular(8),
                                         bottomLeft: Radius.circular(8)),
                                     borderSide: BorderSide.none),
-                                label: Text(
-                                  "Search",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                ),
                               ),
                             ),
                           ),
@@ -334,7 +331,10 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Icon(icon),
+            child: Icon(
+              icon,
+              color: Colors.black,
+            ),
           ),
           Text(
             text,

@@ -12,7 +12,6 @@ class EditProfile extends StatelessWidget {
         title: Text(
           'Edit Profile',
           style: TextStyle(
-            color: Color(0xFF030303),
             fontSize: 20,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w500,
@@ -51,7 +50,6 @@ class EditProfile extends StatelessWidget {
                             Text(
                               'Name',
                               style: TextStyle(
-                                color: Color(0xFF030303),
                                 fontSize: 16,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w500,
@@ -74,7 +72,6 @@ class EditProfile extends StatelessWidget {
                             Text(
                               'Phone Number',
                               style: TextStyle(
-                                color: Color(0xFF030303),
                                 fontSize: 16,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w500,
@@ -97,7 +94,6 @@ class EditProfile extends StatelessWidget {
                             Text(
                               'Email',
                               style: TextStyle(
-                                color: Color(0xFF030303),
                                 fontSize: 16,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w500,
@@ -198,7 +194,6 @@ class EditProfile extends StatelessWidget {
                 Text(
                   'Omar Ashour',
                   style: TextStyle(
-                    color: Color(0xFF030303),
                     fontSize: 20,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
