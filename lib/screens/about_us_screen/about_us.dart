@@ -12,7 +12,6 @@ class AboutUs extends StatelessWidget {
         title: Text(
           'About Us',
           style: TextStyle(
-            color: Color(0xFF030303),
             fontSize: 20,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w500,
@@ -72,7 +71,6 @@ class AboutUs extends StatelessWidget {
             Text(
               model.name!,
               style: TextStyle(
-                color: Color(0xFF030303),
                 fontSize: 16,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,

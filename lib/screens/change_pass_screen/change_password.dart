@@ -24,7 +24,6 @@ class _ChangePasswordState extends State<ChangePassword> {
         title: Text(
           'Change Password',
           style: TextStyle(
-            color: Color(0xFF030303),
             fontSize: 20,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w500,
@@ -64,7 +63,6 @@ class _ChangePasswordState extends State<ChangePassword> {
                     Text(
                       'Old password',
                       style: TextStyle(
-                        color: Color(0xFF030303),
                         fontSize: 12,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
@@ -147,7 +145,6 @@ class _ChangePasswordState extends State<ChangePassword> {
                 Text(
                   'Old Password',
                   style: TextStyle(
-                    color: Color(0xFF030303),
                     fontSize: 16,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,

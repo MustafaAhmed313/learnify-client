@@ -26,7 +26,6 @@ class _NewPasswordState extends State<NewPassword> {
             title: Text(
               'Change Password',
               style: TextStyle(
-                color: Color(0xFF030303),
                 fontSize: 20,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
@@ -104,7 +103,6 @@ class _NewPasswordState extends State<NewPassword> {
                           Text(
                             'New Password',
                             style: TextStyle(
-                              color: Colors.black,
                               fontSize: 12,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w400,
@@ -158,7 +156,6 @@ class _NewPasswordState extends State<NewPassword> {
                       Text(
                         'New Password',
                         style: TextStyle(
-                          color: Color(0xFF030303),
                           fontSize: 16,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w500,
@@ -204,7 +201,6 @@ class _NewPasswordState extends State<NewPassword> {
                       Text(
                         'Confirm New Password',
                         style: TextStyle(
-                          color: Color(0xFF030303),
                           fontSize: 16,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w500,
@@ -351,8 +347,8 @@ class _NewPasswordState extends State<NewPassword> {
                 Text(
                   'your password',
                   style: TextStyle(
-                    color: Colors.black,
                     fontSize: 18,
+                    color: Colors.black,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w600,
                   ),
@@ -365,8 +361,8 @@ class _NewPasswordState extends State<NewPassword> {
             child: Text(
               'has been changed',
               style: TextStyle(
-                color: Colors.black,
                 fontSize: 18,
+                color: Colors.black,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600,
               ),

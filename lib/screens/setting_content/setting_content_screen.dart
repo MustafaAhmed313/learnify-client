@@ -23,7 +23,6 @@ class SettingContentScreen extends StatelessWidget {
                 ? Text(
                     'Setting',
                     style: TextStyle(
-                      color: Color(0xFF030303),
                       fontSize: 20,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
@@ -57,6 +56,7 @@ class SettingContentScreen extends StatelessWidget {
               _personInfo(),
               Expanded(
                 child: ListView.separated(
+                  padding: EdgeInsets.only(top: 10),
                   itemBuilder: (c, i) => _settingBody(cubit.filteredSetting[i]),
                   separatorBuilder: (c, i) => Divider(
                     indent: 25,
@@ -118,7 +118,6 @@ class SettingContentScreen extends StatelessWidget {
                   Text(
                     model.name!,
                     style: TextStyle(
-                      color: Color(0xFF030303),
                       fontSize: 16,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
@@ -172,7 +171,7 @@ class SettingContentScreen extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
       child: Container(
         width: 370,
-        height: 74,
+        height: 80,
         padding: const EdgeInsets.all(13),
         decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
@@ -228,7 +227,6 @@ class SettingContentScreen extends StatelessWidget {
                       child: Text(
                         'Ahmed',
                         style: TextStyle(
-                          color: Color(0xFF030303),
                           fontSize: 16,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w600,
