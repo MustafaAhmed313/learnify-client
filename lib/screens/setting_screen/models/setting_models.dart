@@ -38,4 +38,8 @@ List<SettingModels> settingModels = [
     name: "Change password",
     icon: Icons.key_outlined,
   ),
+    SettingModels(
+    name: "Logout",
+    icon: Icons.logout,
+  ),
 ];
