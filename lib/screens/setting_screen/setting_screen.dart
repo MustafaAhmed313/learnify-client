@@ -7,9 +7,12 @@ import 'package:learnify_client/const/kcolor.dart';
 import 'package:learnify_client/screens/change_pass_screen/change_password.dart';
 import 'package:learnify_client/screens/edit_screen/edit_profile.dart';
 import 'package:learnify_client/screens/help_center/help_center_screen.dart';
+
 import 'package:learnify_client/screens/setting_content/setting_content_screen.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/models/setting_models.dart';
+
+import '../profile_mentor_screen/profile_mentor_screen.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -199,16 +202,22 @@ class SettingScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            padding: const EdgeInsets.all(22),
-            clipBehavior: Clip.antiAlias,
-            decoration: ShapeDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                    "https://th.bing.com/th/id/OIP.ARKjkmC8CHiN18CdgXJ9ngHaHa?rs=1&pid=ImgDetMain"),
+          GestureDetector(
+            onTap: () {
+              Get.to(const ProfileMentorScreen());
+            },
+            child: Container(
+              padding: const EdgeInsets.all(22),
+              clipBehavior: Clip.antiAlias,
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)
+                ),
+                image: const DecorationImage(
+                  image: AssetImage('assets/images/avatar.jpeg'),
+                  fit: BoxFit.cover
+                ),
               ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
             ),
           ),
           SizedBox(width: 12),

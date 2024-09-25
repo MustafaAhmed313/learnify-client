@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:learnify_client/screens/setting_screen/models/setting_models.dart';
-import 'package:meta/meta.dart';
 
 part 'switch_state.dart';
 
