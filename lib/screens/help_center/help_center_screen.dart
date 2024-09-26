@@ -15,6 +15,9 @@ class HelpCenterScreen extends StatefulWidget {
 class _HelpCenterScreenState extends State<HelpCenterScreen> {
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     return BlocBuilder<HelpCenterCubit, HelpCenterState>(
       builder: (context, state) {
         final cubit = context.read<HelpCenterCubit>();
@@ -23,15 +26,15 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
             title: Text(
               'Help Center',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: width * 0.05,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ),
             ),
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(60),
+              preferredSize: Size.fromHeight(height * 0.075),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.symmetric(horizontal: width * 0.075),
                 child: Row(
                   children: [
                     GestureDetector(
@@ -47,17 +50,17 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                               color: cubit.tabController.index == 0
                                   ? Kcolor.mainColor
                                   : Color(0xFF92929D),
-                              fontSize: 16,
+                              fontSize: width * 0.04,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: height * 0.01,
                           ),
                           Container(
                             height: 2,
-                            width: 170,
+                            width: width * 0.45,
                             color: cubit.tabController.index == 0
                                 ? Kcolor.mainColor
                                 : Color(0xFF92929D),
@@ -78,17 +81,17 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                               color: cubit.tabController.index == 1
                                   ? Kcolor.mainColor
                                   : Color(0xFF92929D),
-                              fontSize: 16,
+                              fontSize: width * 0.04,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: height * 0.01,
                           ),
                           Container(
                             height: 2,
-                            width: 179,
+                            width: width * 0.4,
                             color: cubit.tabController.index == 1
                                 ? Kcolor.mainColor
                                 : Color(0xFF92929D),
@@ -108,14 +111,16 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 20, left: 20),
+                      padding: EdgeInsets.only(
+                          top: height * 0.025, left: width * 0.05),
                       child: Row(
                         children: [
                           Container(
-                            width: 96,
-                            height: 40,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
+                            width: width * 0.25,
+                            height: height * 0.05,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: width * 0.04,
+                                vertical: height * 0.01),
                             decoration: ShapeDecoration(
                               color: Color(0xFF056AFF),
                               shape: RoundedRectangleBorder(
@@ -129,7 +134,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                                 'General',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: width * 0.04,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -137,13 +142,14 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                             ),
                           ),
                           SizedBox(
-                            width: 12,
+                            width: width * 0.03,
                           ),
                           Container(
-                            width: 96,
-                            height: 40,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
+                            width: width * 0.25,
+                            height: height * 0.05,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: width * 0.04,
+                                vertical: height * 0.01),
                             decoration: ShapeDecoration(
                               color: Colors.white,
                               shape: RoundedRectangleBorder(
@@ -157,7 +163,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                                 'Service',
                                 style: TextStyle(
                                   color: Color(0xFF056AFF),
-                                  fontSize: 16,
+                                  fontSize: width * 0.04,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -168,43 +174,53 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 48,
-                            width: 323,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search',
-                                hintStyle: TextStyle(
-                                  color: Colors.grey,
-                                ),
-                                fillColor: Colors.white,
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(8),
-                                        bottomLeft: Radius.circular(8)),
-                                    borderSide: BorderSide.none),
-                              ),
-                            ),
-                          ),
-                          Spacer(),
-                          Container(
-                            width: 48,
-                            height: 48,
-                            decoration: BoxDecoration(
-                                color: Color(0xFF056AFF),
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(8),
-                                    bottomRight: Radius.circular(8))),
-                            child: Icon(
-                              Icons.mic_none_outlined,
+                      padding: EdgeInsets.all(width * 0.05),
+                      child: Expanded(
+                        child: Container(
+                          height: height * 0.06,
+                          decoration: BoxDecoration(
                               color: Colors.white,
-                            ),
-                          )
-                        ],
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  bottomLeft: Radius.circular(8))),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: height * 0.06,
+                                width: width * 0.75,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Search',
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(8),
+                                            bottomLeft: Radius.circular(8)),
+                                        borderSide: BorderSide.none),
+                                  ),
+                                ),
+                              ),
+                              Spacer(),
+                              Container(
+                                width: height * 0.06,
+                                height: height * 0.06,
+                                decoration: BoxDecoration(
+                                    color: Color(0xFF056AFF),
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(8),
+                                        bottomRight: Radius.circular(8))),
+                                child: Icon(
+                                  Icons.mic_none_outlined,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     Column(
@@ -219,36 +235,35 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                   ],
                 ),
               ),
-
               Column(
                 children: [
                   SizedBox(
-                    height: 20,
+                    height: height * 0.025,
                   ),
                   _contactContent(
                       Icons.headphones_outlined, 'Customer Service'),
                   SizedBox(
-                    height: 25,
+                    height: height * 0.03,
                   ),
                   _contactContent(FontAwesomeIcons.whatsapp, 'WhatsApp'),
                   SizedBox(
-                    height: 25,
+                    height: height * 0.03,
                   ),
                   _contactContent(Icons.language, 'Website'),
                   SizedBox(
-                    height: 25,
+                    height: height * 0.03,
                   ),
                   _contactContent(FontAwesomeIcons.facebook, 'Facebook'),
                   SizedBox(
-                    height: 25,
+                    height: height * 0.03,
                   ),
                   _contactContent(FontAwesomeIcons.instagram, 'Instagram'),
                   SizedBox(
-                    height: 25,
+                    height: height * 0.03,
                   ),
                   _contactContent(FontAwesomeIcons.twitter, 'Twitter'),
                 ],
-              ), // Replace with Contact Us content
+              ),
             ],
           ),
         );
@@ -257,10 +272,11 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
   }
 
   Widget _faq() {
+    final width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.only(bottom: 20),
       child: Container(
-        width: 375,
+        width: width * 0.95,
         decoration: BoxDecoration(
           color: Color(0xFFFCFCFC),
           borderRadius: BorderRadius.circular(10),
@@ -278,7 +294,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
               'What is Learnify?',
               style: TextStyle(
                 color: Color(0xFF030303),
-                fontSize: 16,
+                fontSize: width * 0.04,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
               ),
@@ -291,13 +307,12 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                 thickness: 1,
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
                   style: TextStyle(
                     color: Colors.black54,
-                    fontSize: 14,
+                    fontSize: width * 0.035,
                     fontFamily: 'Poppins',
                   ),
                 ),
@@ -317,9 +332,11 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
   }
 
   Widget _contactContent(IconData? icon, String text) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Container(
-      width: 354,
-      height: 48,
+      width: width * 0.9,
+      height: height * 0.06,
       decoration: ShapeDecoration(
         color: Color(0xFFFCFCFC),
         shape: RoundedRectangleBorder(
@@ -340,7 +357,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
             text,
             style: TextStyle(
               color: Color(0xFF030303),
-              fontSize: 18,
+              fontSize: MediaQuery.of(context).size.width * 0.045,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
             ),

@@ -8,7 +8,6 @@ import 'package:learnify_client/screens/change_pass_screen/cubit/validate_passwo
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
-import 'package:learnify_client/screens/setting_screen/setting_screen.dart';
 
 const darkModeBox = 'darkModeTutorial';
 void main() async {
