@@ -110,6 +110,7 @@ class _ChangePasswordState extends State<ChangePassword> {
           Padding(
             padding: const EdgeInsets.only(top: 20, left: 50, right: 50),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CircleAvatar(
                   backgroundColor: Color(0xFFACCDFF),
@@ -123,7 +124,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   width: 5,
                 ),
                 Container(
-                  width: 260,
+                  width: 255,
                   height: 3,
                   color: Color(0xFFACCDFF),
                 ),
