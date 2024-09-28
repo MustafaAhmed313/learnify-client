@@ -19,6 +19,8 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -123,13 +125,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                 SizedBox(
                   width: 5,
                 ),
-                Container(
-                  width: 255,
-                  height: 3,
-                  color: Color(0xFFACCDFF),
+                Expanded(
+                  child: Container(
+                    height: 3,
+                    color: Color(0xFFACCDFF),
+                  ),
                 ),
                 SizedBox(
-                  width: 9,
+                  width: width * 0.02,
                 ),
                 CircleAvatar(
                   radius: 4,
@@ -188,7 +191,7 @@ class _ChangePasswordState extends State<ChangePassword> {
             height: 4,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 260.0),
+            padding: const EdgeInsets.only(left: 250.0),
             child: Text(
               'Forgot Password?',
               style: TextStyle(
