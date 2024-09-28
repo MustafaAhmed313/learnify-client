@@ -180,9 +180,8 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                           height: height * 0.06,
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(8),
-                                  bottomLeft: Radius.circular(8))),
+                              borderRadius: BorderRadius.circular(8)
+                                  ),
                           child: Row(
                             children: [
                               Container(
