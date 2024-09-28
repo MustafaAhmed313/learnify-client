@@ -114,7 +114,7 @@ class _NewPasswordState extends State<NewPassword> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 50, right: 30),
+                  padding: const EdgeInsets.only(top: 20, left: 50, right: 42),
                   child: Row(
                     children: [
                       CircleAvatar(
@@ -129,10 +129,12 @@ class _NewPasswordState extends State<NewPassword> {
                       SizedBox(
                         width: 5,
                       ),
-                      Container(
-                        width: 260,
-                        height: 3,
-                        color: Color(0xff4ADE80),
+                      Expanded(
+                        child: Container(
+                          width: 260,
+                          height: 3,
+                          color: Color(0xff4ADE80),
+                        ),
                       ),
                       SizedBox(
                         width: 5,
