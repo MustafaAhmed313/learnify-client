@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:learnify_client/screens/SuccessPage.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/change_pass_screen/cubit/validate_password_cubit.dart';
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
@@ -64,7 +65,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             theme: lightTheme, // Light theme
             darkTheme: darkTheme, // Dark theme
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            home: BottomNav(),
+            home: BackgroundPage(),
           );
         },
       ),
