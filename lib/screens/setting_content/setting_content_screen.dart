@@ -9,6 +9,8 @@ import 'package:learnify_client/screens/setting_content/cubit/setting_content_cu
 import 'package:learnify_client/screens/setting_content/models/setting_content_model.dart';
 import 'package:learnify_client/screens/setting_content/widget/rate_dialog.dart';
 
+import '../profile_mentor_screen/profile_mentor_screen.dart';
+
 class SettingContentScreen extends StatelessWidget {
   const SettingContentScreen({super.key});
 
@@ -184,16 +186,21 @@ class SettingContentScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.all(22),
-              clipBehavior: Clip.antiAlias,
-              decoration: ShapeDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      "https://th.bing.com/th/id/OIP.ARKjkmC8CHiN18CdgXJ9ngHaHa?rs=1&pid=ImgDetMain"),
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+            GestureDetector(
+              onTap: () {
+                Get.to(const ProfileMentorScreen());
+              },
+              child: Container(
+                padding: const EdgeInsets.all(22),
+                clipBehavior: Clip.antiAlias,
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)
+                  ),
+                  image: const DecorationImage(
+                      image: AssetImage('assets/images/avatar.jpeg'),
+                      fit: BoxFit.cover
+                  ),
                 ),
               ),
             ),

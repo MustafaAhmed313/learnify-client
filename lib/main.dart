@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:learnify_client/screens/SuccessPage.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/change_pass_screen/cubit/validate_password_cubit.dart';
+import 'package:learnify_client/screens/create_pass_screen.dart';
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
-import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
+
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
@@ -27,11 +29,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   final lightTheme = ThemeData(
     brightness: Brightness.light,
+    fontFamily: 'Poppins'
     // primaryColor: Colors.blue,
   );
 
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
+    fontFamily: 'Poppins'
     // primaryColor: Colors.grey,
   );
   @override
@@ -48,10 +52,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           create: (context) => SettingContentCubit(),
         ),
         BlocProvider(
-          create: (context) => ValidatePasswordCubit(),
-        ),
-         BlocProvider(
-          create: (context) => CarouselCubit(),
+          create: (context) => ValidatePasswordCubit()
         ),
       ],
       child: BlocBuilder<SwitchCubit, SwitchState>(
@@ -62,7 +63,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             theme: lightTheme, // Light theme
             darkTheme: darkTheme, // Dark theme
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            home: BottomNav(),
+            home: CreatePassScreen(),
           );
         },
       ),
