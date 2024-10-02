@@ -12,6 +12,7 @@ class SignIn1 extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           leading: const Icon(Icons.arrow_back),
