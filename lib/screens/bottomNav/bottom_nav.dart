@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/screens/home_screen/home_screen.dart';
 import 'package:learnify_client/screens/setting_screen/setting_screen.dart';
 
 class BottomNav extends StatefulWidget {
@@ -14,11 +15,7 @@ class _BottomNavState extends State<BottomNav> {
   int selectIndex = 0;
 
   List<Widget> screens = [
-    Center(
-        child: Text(
-      'Home',
-      style: TextStyle(fontSize: 50),
-    )),
+    HomeScreen(),
     Center(
         child: Text(
       'Courses',

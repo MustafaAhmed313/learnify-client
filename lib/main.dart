@@ -6,6 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/change_pass_screen/cubit/validate_password_cubit.dart';
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
+import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
@@ -48,6 +49,9 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         ),
         BlocProvider(
           create: (context) => ValidatePasswordCubit(),
+        ),
+         BlocProvider(
+          create: (context) => CarouselCubit(),
         ),
       ],
       child: BlocBuilder<SwitchCubit, SwitchState>(
