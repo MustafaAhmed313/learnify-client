@@ -14,6 +14,7 @@ import 'package:learnify_client/screens/profile_mentor_screen/cubit/tab_change_c
 
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
+import 'package:learnify_client/screens/sign_in_1.dart';
 import 'package:learnify_client/screens/sign_in_screen.dart';
 
 const darkModeBox = 'darkModeTutorial';
@@ -70,7 +71,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             theme: lightTheme, // Light theme
             darkTheme: darkTheme, // Dark theme
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            home: SignInScreen(),
+            home: SignInScreen (),
           );
         },
       ),

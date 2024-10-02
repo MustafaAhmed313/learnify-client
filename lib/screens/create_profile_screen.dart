@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateProfileScreen extends StatelessWidget {
+class CreateProfileScreen extends StatefulWidget {
   const CreateProfileScreen({super.key});
 
+  @override
+  State<CreateProfileScreen> createState() => _CreateProfileScreenState();
+}
+
+class _CreateProfileScreenState extends State<CreateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     // Getting screen height and width using MediaQuery for responsiveness
