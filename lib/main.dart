@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:learnify_client/cubit/login_cubit.dart';
+import 'package:learnify_client/helpers/dio_helper.dart';
 import 'package:learnify_client/screens/Congratulation_screen.dart';
 import 'package:learnify_client/screens/SuccessPage.dart';
 
@@ -24,6 +26,8 @@ const darkModeBox = 'darkModeTutorial';
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox(darkModeBox);
+    DioHelper.inint();
+
   runApp(const MyApp());
 }
 
@@ -65,6 +69,9 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         BlocProvider(
           create: (context) => CarouselCubit(),
         ),
+                BlocProvider(
+          create: (context) => LoginCubit(),
+        ),
       ],
       child: BlocBuilder<SwitchCubit, SwitchState>(
         builder: (context, state) {
@@ -74,7 +81,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             theme: lightTheme, // Light theme
             darkTheme: darkTheme, // Dark theme
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            home: CongratulationScreen(),
+            home: SignInScreen(),
           );
         },
       ),
