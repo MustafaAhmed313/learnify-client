@@ -6,6 +6,9 @@ class ForgotPassScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -83,35 +86,20 @@ class ForgotPassScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 9),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    buildStep(true, false),
-                    SizedBox(
-                      width: 10,
-                    ), // Step 1 completed
-                    Expanded(
-                      child:
-                          buildLine(50.0, Colors.grey), // Line width set to 50
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    buildStep(false, false),
-                    SizedBox(
-                      width: 10,
-                    ), // Step 2 completed
-                    Expanded(
-                      child:
-                          buildLine(50.0, Colors.grey), // Line width set to 50
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    buildStep(false, false), // Step 3 completed
-
-                    // Current step (active, but not completed)
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(right: 15.0, left: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      buildStep(true, false),
+                      Expanded(
+                          child: buildLine(screenWidth * 0.12, Colors.green)),
+                      buildStep(false, false),
+                      Expanded(
+                          child: buildLine(screenWidth * 0.12, Colors.green)),
+                      buildStep(false, false),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 20),
                 Text(
