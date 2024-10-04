@@ -27,7 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
         HiveHelper.setToken(model.data?.token ?? "");
 
         emit(LoginSuccessState(model.message ?? ""));
-        Get.offAll(BottomNav());
+        Get.(BottomNav());
       } else {
         emit(LoginErorrState(model.message ?? ""));
       }
