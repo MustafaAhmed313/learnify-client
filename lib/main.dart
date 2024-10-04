@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             theme: lightTheme, // Light theme
             darkTheme: darkTheme, // Dark theme
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            home: VerificationScreen(),
+            home: SignInScreen(),
           );
         },
       ),

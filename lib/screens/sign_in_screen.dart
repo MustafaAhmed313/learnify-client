@@ -1,27 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:learnify_client/screens/sign_in_1.dart'; // Ensure this is correct
+import 'package:learnify_client/screens/sign_in_1.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SignInScreen(),
-      routes: {
-        '/forgot-password': (context) =>
-            SignIn1(), // Correct route for forgot password screen
-      },
-    );
-  }
-}
+import 'forgot_pass_screen.dart'; // Ensure this is correct
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -260,8 +244,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(width: screenWidth * .18),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(
-                        context, '/forgot-password'); // Fixed route navigation
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ForgotPassScreen(),
+                      ),
+                    );
+                    log("cliked"); // Fixed route navigation
                   },
                   child: Text(
                     "Forgot Password?",
@@ -282,9 +270,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 height: 48,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    print('Button Pressed');
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 5, 106, 255),
                     foregroundColor: Colors.white,
