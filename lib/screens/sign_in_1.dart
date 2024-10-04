@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'package:get/get.dart';
 import 'package:learnify_client/screens/sign_in_screen.dart';
 =======
 >>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
 
+=======
+>>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
 
 class SignIn1 extends StatelessWidget {
   const SignIn1({super.key});
@@ -22,12 +25,16 @@ class SignIn1 extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
 <<<<<<< HEAD
+<<<<<<< HEAD
          leading: GestureDetector(
               onTap: () {
                 Get.back();
               },
               child: const Icon(Icons.arrow_back)),
 
+=======
+          leading: const Icon(Icons.arrow_back),
+>>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
 =======
           leading: const Icon(Icons.arrow_back),
 >>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
@@ -223,6 +230,7 @@ class SignIn1 extends StatelessWidget {
                       ),
                     ),
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         GestureDetector(
                       onTap: () {
                         Get.to(SignInScreen());
@@ -230,6 +238,8 @@ class SignIn1 extends StatelessWidget {
                       child: 
                      
 
+=======
+>>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
 =======
 >>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
                     Text(

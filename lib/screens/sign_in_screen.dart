@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/sign_in_1.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+=======
+>>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
 =======
 >>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
 
@@ -37,9 +40,12 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+=======
+>>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
 =======
 >>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
   @override
@@ -49,6 +55,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
 <<<<<<< HEAD
       home: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
@@ -83,6 +90,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(7),
 =======
+=======
+>>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
       home: Scaffold(
         appBar: AppBar(
           leading: Icon(Icons.arrow_back),
@@ -108,6 +117,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         color: Colors.grey,
                       ),
                     ),
+<<<<<<< HEAD
+>>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
+=======
 >>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
                   ),
                 ),
@@ -309,6 +321,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
 <<<<<<< HEAD
+<<<<<<< HEAD
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
@@ -476,6 +489,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         )
                       ],
                     ),
+=======
+>>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
 =======
 >>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
                     SizedBox(

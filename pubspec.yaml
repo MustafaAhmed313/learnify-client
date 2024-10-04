@@ -44,7 +44,10 @@ dependencies:
   hive_flutter: ^1.1.0
   carousel_slider: ^5.0.0
   smooth_page_indicator: ^1.2.0+3
+<<<<<<< HEAD
 
+=======
+>>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
 
 dev_dependencies:
   flutter_test:

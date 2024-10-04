@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-<<<<<<< HEAD
-import 'package:learnify_client/helpers/hive_helper.dart';
-=======
->>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
+import 'package:learnify_client/cubit/login_cubit.dart';
+import 'package:learnify_client/helpers/dio_helper.dart';
 import 'package:learnify_client/screens/Congratulation_screen.dart';
 import 'package:learnify_client/screens/SuccessPage.dart';
 
@@ -32,15 +30,8 @@ void main() async {
 
   await Hive.initFlutter();
   await Hive.openBox(darkModeBox);
-<<<<<<< HEAD
-    await Hive.openBox('LOGIN_BOX');
-  await Hive.openBox(HiveHelper.token);
+    DioHelper.inint();
 
-      DioHelper.inint();
-
-
-=======
->>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
   runApp(const MyApp());
 }
 
@@ -82,13 +73,9 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         BlocProvider(
           create: (context) => CarouselCubit(),
         ),
-<<<<<<< HEAD
-                        BlocProvider(
+                BlocProvider(
           create: (context) => LoginCubit(),
         ),
-
-=======
->>>>>>> c295555e5dabb9fda7b81837863b2ddd3268d03f
       ],
       child: BlocBuilder<SwitchCubit, SwitchState>(
         builder: (context, state) {
