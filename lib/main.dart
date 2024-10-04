@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:learnify_client/cubit/login_cubit.dart';
-import 'package:learnify_client/helpers/dio_helper.dart';
+import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/screens/Congratulation_screen.dart';
 import 'package:learnify_client/screens/SuccessPage.dart';
 
@@ -16,6 +15,8 @@ import 'package:learnify_client/screens/error_screen.dart';
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
 import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
 import 'package:learnify_client/screens/profile_mentor_screen/cubit/tab_change_cubit.dart';
+import 'package:learnify_client/cubit/login_cubit.dart';
+import 'package:learnify_client/helpers/dio_helper.dart';
 
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
@@ -24,9 +25,15 @@ import 'package:learnify_client/screens/sign_in_screen.dart';
 
 const darkModeBox = 'darkModeTutorial';
 void main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
   await Hive.openBox(darkModeBox);
-    DioHelper.inint();
+    await Hive.openBox('LOGIN_BOX');
+  await Hive.openBox(HiveHelper.token);
+
+      DioHelper.inint();
+
 
   runApp(const MyApp());
 }
@@ -69,9 +76,10 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         BlocProvider(
           create: (context) => CarouselCubit(),
         ),
-                BlocProvider(
+                        BlocProvider(
           create: (context) => LoginCubit(),
         ),
+
       ],
       child: BlocBuilder<SwitchCubit, SwitchState>(
         builder: (context, state) {
@@ -86,5 +94,15 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         },
       ),
     );
+  }
+
+   Widget _determineHomeScreen() {
+    final token = HiveHelper.getToken(); // Retrieve token from Hive
+
+    if (token != null && token.isNotEmpty) {
+      return BottomNav(); // Navigate to BottomNav if token exists
+    } else {
+      return SignInScreen(); // Navigate to SignInScreen if no token
+    }
   }
 }

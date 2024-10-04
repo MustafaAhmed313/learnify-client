@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learnify_client/cubit/login_cubit.dart';
+import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/sign_in_1.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -34,8 +35,10 @@ class _SignInScreenState extends State<SignInScreen> {
 
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return MaterialApp(
@@ -45,14 +48,14 @@ class _SignInScreenState extends State<SignInScreen> {
           // TODO: implement listener
           if (state is LoginErorrState) {
             Get.snackbar(
-              "Erorr",
+              'Erorr',
               state.msg,
               backgroundColor: Colors.red,
               colorText: Colors.white,
             );
           } else if (state is LoginSuccessState) {
             Get.snackbar(
-              "success",
+              'Success',
               state.msge,
               backgroundColor: Colors.green,
               colorText: Colors.white,
@@ -324,7 +327,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                   context.read<LoginCubit>().login(
                                       email: _emailController.text,
                                       password: _userPasswordController.text);
+                                  setState(() {
+                                    HiveHelper.setValueLoginBox();
+                                  });
                                 }
+
                                 // Button action here
                                 print('Button Pressed');
                               },

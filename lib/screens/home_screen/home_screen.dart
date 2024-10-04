@@ -61,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        top: height * 0.07, left: width * 0.02),
+                                        top: height * 0.05, left: width * 0.02),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -184,7 +184,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: height * 0.08,
+                      height: height * 0.09,
                       child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (c, i) =>
