@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:learnify_client/screens/Congratulation_screen.dart';
 import 'package:learnify_client/screens/SuccessPage.dart';
-import 'package:learnify_client/screens/Verification1_screen.dart';
+import 'package:learnify_client/screens/Verification_screen1.dart';
 
 import 'package:learnify_client/screens/about_us_screen/about_us.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
