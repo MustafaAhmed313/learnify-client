@@ -1,21 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:learnify_client/screens/sign_in_1.dart';
-
-import 'forgot_pass_screen.dart'; // Ensure this is correct
-
 import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/sign_in_1.dart';
-
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -422,89 +414,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         SizedBox(
                           width: 10,
                         ),
-
-                      ),
-                    ),
-                  ),
-                ),
-
-                SizedBox(width: screenWidth * .18),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const ForgotPassScreen(),
-                      ),
-                    );
-                    log("cliked"); // Fixed route navigation
-                  },
-                  child: Text(
-                    "Forgot Password?",
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue,
-                      ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 35.0),
-                      child: Text(
-                        "Don't have an acount? ",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      "Sign Up",
-                      style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.blue),
-                      ),
-                    ),
-                    Icon(
-                      Icons.north_east,
-                      color: Colors.blue,
-                    )
-                  ],
-                ),
-
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SizedBox(
-                height: 48,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 5, 106, 255),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    textStyle: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                SizedBox(
-                  height: 20,
-                ),
-                const Row(
-                  children: [
-                    Expanded(
-                      child: Divider(color: Colors.grey, thickness: 1),
-
                         Expanded(
                           child: Divider(color: Colors.grey, thickness: 1),
                         ),
                       ],
-
                     ),
                     SizedBox(
                       height: 15,
@@ -580,7 +493,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-      ),
-    );
-  }
+     ),
+ );
+ }
 }
