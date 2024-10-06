@@ -12,6 +12,7 @@ import 'package:learnify_client/screens/help_center/help_center_screen.dart';
 import 'package:learnify_client/screens/setting_content/setting_content_screen.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/models/setting_models.dart';
+import 'package:learnify_client/screens/sign_in_screen.dart';
 
 import '../profile_mentor_screen/profile_mentor_screen.dart';
 
@@ -284,13 +285,18 @@ class SettingScreen extends StatelessWidget {
                     ),
                   ),
                   child: Center(
-                    child: Text(
-                      'Yes,Logout',
-                      style: TextStyle(
-                        color: Color(0xFF056AFF),
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(SignInScreen());
+                      },
+                      child: Text(
+                        'Yes,Logout',
+                        style: TextStyle(
+                          color: Color(0xFF056AFF),
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
@@ -328,12 +334,10 @@ class SettingScreen extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)
-                ),
+                    borderRadius: BorderRadius.circular(8)),
                 image: const DecorationImage(
-                  image: AssetImage('assets/images/avatar.jpeg'),
-                  fit: BoxFit.cover
-                ),
+                    image: AssetImage('assets/images/avatar.jpeg'),
+                    fit: BoxFit.cover),
               ),
             ),
           ),

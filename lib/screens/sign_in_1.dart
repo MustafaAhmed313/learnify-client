@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:learnify_client/screens/sign_in_screen.dart';
 
 class SignIn1 extends StatelessWidget {
   const SignIn1({super.key});
@@ -12,10 +14,14 @@ class SignIn1 extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          leading: const Icon(Icons.arrow_back),
+          leading: GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: const Icon(Icons.arrow_back)),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -198,7 +204,7 @@ class SignIn1 extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 35.0),
                       child: Text(
-                        "Don't have an acount? ",
+                        "Already have an account? ",
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                               fontSize: screenWidth * 0.04,
@@ -207,13 +213,18 @@ class SignIn1 extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(
-                      "Sign Up",
-                      style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontSize: screenWidth * 0.04,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.blue),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(SignInScreen());
+                      },
+                      child: Text(
+                        "Sign in",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              fontSize: screenWidth * 0.04,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue),
+                        ),
                       ),
                     ),
                     Icon(
