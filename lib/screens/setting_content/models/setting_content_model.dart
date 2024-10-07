@@ -16,10 +16,10 @@ List<SettingContentModel> settingContentModel = [
     name: 'My Card',
     icon: Icons.credit_card_outlined,
   ),
-  SettingContentModel(
-    name: 'Change Password',
-    icon: Icons.key_outlined,
-  ),
+  // SettingContentModel(
+  //   name: 'Change Password',
+  //   icon: Icons.key_outlined,
+  // ),
   SettingContentModel(
     name: 'Manage Notification',
     icon: Icons.notifications_outlined,

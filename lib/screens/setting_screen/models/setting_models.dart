@@ -6,7 +6,7 @@ class SettingModels {
   String? optionalName;
   bool? isSwitched;
 
-  SettingModels({this.icon, this.name, this.optionalName,this.isSwitched});
+  SettingModels({this.icon, this.name, this.optionalName, this.isSwitched});
 }
 
 List<SettingModels> settingModels = [
@@ -18,10 +18,10 @@ List<SettingModels> settingModels = [
     name: "Setting",
     icon: Icons.settings,
   ),
-  SettingModels(
-    name: "Manage Notification",
-    icon: Icons.notifications_none,
-  ),
+  // SettingModels(
+  //   name: "Manage Notification",
+  //   icon: Icons.notifications_none,
+  // ),
   SettingModels(
     name: "Help Center",
     icon: Icons.help_center_outlined,
@@ -38,7 +38,7 @@ List<SettingModels> settingModels = [
     name: "Change password",
     icon: Icons.key_outlined,
   ),
-    SettingModels(
+  SettingModels(
     name: "Logout",
     icon: Icons.logout,
   ),

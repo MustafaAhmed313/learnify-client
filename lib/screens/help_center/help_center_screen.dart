@@ -112,7 +112,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          top: height * 0.025, left: width * 0.05),
+                          top: height * 0.03, left: width * 0.05),
                       child: Row(
                         children: [
                           Container(
@@ -180,8 +180,9 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                           height: height * 0.06,
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(8)
-                                  ),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  bottomLeft: Radius.circular(8))),
                           child: Row(
                             children: [
                               Container(
