@@ -7,7 +7,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
+
+import 'package:learnify_client/screens/forget_pass_screen/for_get_pass.dart';
+
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
+
 import 'package:learnify_client/screens/sign_in_1.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -322,6 +326,68 @@ class _SignInScreenState extends State<SignInScreen> {
                           ],
                         ),
                         Padding(
+
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.check_box_outline_blank,
+                            size: 30,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Text(
+                          "Remember Me",
+                          style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey),
+                          ),
+                        ),
+                        SizedBox(
+                          width: screenWidth * .18,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ForgotPasswordPage()),
+                            );
+                          },
+                          child: Text(
+                            "Forgot Password?",
+                            style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.blue),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: SizedBox(
+                        height: 48,
+                        width: double.infinity, // Full width
+                        child: BlocBuilder<LoginCubit, LoginState>(
+                          builder: (context, state) {
+                            if (state is LoginLoadingState) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            return ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  context.read<LoginCubit>().login(
+                                      email: _emailController.text,
+                                      password: _userPasswordController.text);
+                                  setState(() {
+                                    HiveHelper.setValueLoginBox();
+                                  });
+
                           padding: const EdgeInsets.all(16.0),
                           child: SizedBox(
                             height: 48,
@@ -332,6 +398,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   return Center(
                                     child: CircularProgressIndicator(),
                                   );
+
                                 }
                                 return ElevatedButton(
                                   onPressed: () {
@@ -512,7 +579,7 @@ class _SignInScreenState extends State<SignInScreen> {
             );
           },
         ),
-     ),
- );
- }
+      ),
+    );
+  }
 }

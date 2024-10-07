@@ -16,6 +16,7 @@ import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 
 
 import 'package:learnify_client/screens/change_pass_screen/cubit/validate_password_cubit.dart';
+import 'package:learnify_client/screens/forget_pass_screen/for_get_pass.dart';
 
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
 import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
@@ -25,8 +26,12 @@ import 'package:learnify_client/screens/profile_mentor_screen/cubit/tab_change_c
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/sign_in_screen.dart';
+
+import 'package:learnify_client/screens/verfi_screen.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:learnify_client/screens/splash/splash_screen.dart';
+
 
 const darkModeBox = 'darkModeTutorial';
 void main() async {
@@ -38,6 +43,8 @@ void main() async {
 await Hive.openBox('onboardingBox');
 
   DioHelper.inint();
+
+
   final token = HiveHelper.getToken();
   Widget initialScreen;
 
@@ -48,6 +55,7 @@ await Hive.openBox('onboardingBox');
     // Otherwise, show the login screen
     initialScreen = SignInScreen();
   }
+
 
   runApp(MyApp(initialScreen: initialScreen));
 }

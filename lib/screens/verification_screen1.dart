@@ -192,8 +192,7 @@ class VerificationScreen extends StatelessWidget {
                           print('Button Pressed');
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(
-                              255, 5, 106, 255), // Button background color
+                          backgroundColor: const Color(0xFF056AFF), // Button background color
                           foregroundColor: Colors.white, // Text color
                           padding: const EdgeInsets.symmetric(
                               vertical:
