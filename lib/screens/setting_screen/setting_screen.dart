@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/helpers/hive_helper.dart';
+import 'package:learnify_client/language_cubit/language_cubit.dart';
 import 'package:learnify_client/screens/change_pass_screen/change_password.dart';
 import 'package:learnify_client/screens/edit_screen/edit_profile.dart';
 import 'package:learnify_client/screens/help_center/help_center_screen.dart';
@@ -12,11 +14,20 @@ import 'package:learnify_client/screens/help_center/help_center_screen.dart';
 import 'package:learnify_client/screens/setting_content/setting_content_screen.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/models/setting_models.dart';
+import 'package:learnify_client/screens/sign_in_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../profile_mentor_screen/profile_mentor_screen.dart';
 
-class SettingScreen extends StatelessWidget {
+class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
+
+  @override
+  State<SettingScreen> createState() => _SettingScreenState();
+}
+
+class _SettingScreenState extends State<SettingScreen> {
+  String _selectedLanguage = 'English';
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +48,7 @@ class SettingScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 135.0),
                           child: Text(
-                            "Account",
+                            AppLocalizations.of(context)!.account,
                             style: TextStyle(
                               fontSize: 20,
                               fontFamily: 'Poppins',
@@ -111,6 +122,9 @@ class SettingScreen extends StatelessWidget {
                     builder: (BuildContext context) {
                       return _buildLogout(context);
                     });
+              } else if (model.name == 'Language') {
+                _showLanguageDialog(
+                    context); // عرض القائمة عند الضغط على السهم بجوار اللغة
               }
             },
             child: Container(
@@ -162,7 +176,9 @@ class SettingScreen extends StatelessWidget {
                   if (model.optionalName != null &&
                       model.optionalName!.isNotEmpty)
                     Text(
-                      model.optionalName ?? "",
+                      model.name == 'Dark Mode'
+                          ? model.optionalName ?? ""
+                          : _selectedLanguage,
                       style: TextStyle(
                         color: Color(0xFF92929D),
                         fontSize: 16,
@@ -204,6 +220,42 @@ class SettingScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  void _showLanguageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Select Language"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DropdownButton<String>(
+                value: _selectedLanguage,
+                items: <String>['English', 'Arabic'].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedLanguage = newValue ?? 'English';
+                    if (LanguageCubit.isArabic) {
+                      context.read<LanguageCubit>().toEnglish();
+                    } else {
+                      context.read<LanguageCubit>().toArabic();
+                    }
+                  });
+                  Navigator.pop(context); // إغلاق الـ Dialog بعد الاختيار
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -270,8 +322,9 @@ class SettingScreen extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
+                onTap: () async {
+                  await HiveHelper.deleteToken();
+                  Get.offAll(() => SignInScreen());
                 },
                 child: Container(
                   width: 318,
@@ -284,13 +337,19 @@ class SettingScreen extends StatelessWidget {
                     ),
                   ),
                   child: Center(
-                    child: Text(
-                      'Yes,Logout',
-                      style: TextStyle(
-                        color: Color(0xFF056AFF),
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
+                    child: GestureDetector(
+                      onTap: () async {
+                        HiveHelper.deleteToken();
+                        Get.offAll(SignInScreen());
+                      },
+                      child: Text(
+                        'Yes,Logout',
+                        style: TextStyle(
+                          color: Color(0xFF056AFF),
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
@@ -328,12 +387,10 @@ class SettingScreen extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)
-                ),
+                    borderRadius: BorderRadius.circular(8)),
                 image: const DecorationImage(
-                  image: AssetImage('assets/images/avatar.jpeg'),
-                  fit: BoxFit.cover
-                ),
+                    image: AssetImage('assets/images/avatar.jpeg'),
+                    fit: BoxFit.cover),
               ),
             ),
           ),
