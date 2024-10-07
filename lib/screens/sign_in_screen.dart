@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
+import 'package:learnify_client/screens/forget_pass_screen/for_get_pass.dart';
 import 'package:learnify_client/screens/sign_in_1.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -297,13 +298,22 @@ class _SignInScreenState extends State<SignInScreen> {
                         SizedBox(
                           width: screenWidth * .18,
                         ),
-                        Text(
-                          "Forgot Password?",
-                          style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.blue),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ForgotPasswordPage()),
+                            );
+                          },
+                          child: Text(
+                            "Forgot Password?",
+                            style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.blue),
+                            ),
                           ),
                         ),
                       ],
@@ -493,7 +503,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-     ),
- );
- }
+      ),
+    );
+  }
 }

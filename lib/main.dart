@@ -12,6 +12,7 @@ import 'package:learnify_client/helpers/dio_helper.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 
 import 'package:learnify_client/screens/change_pass_screen/cubit/validate_password_cubit.dart';
+import 'package:learnify_client/screens/forget_pass_screen/for_get_pass.dart';
 
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
 import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
@@ -20,15 +21,16 @@ import 'package:learnify_client/screens/profile_mentor_screen/cubit/tab_change_c
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/sign_in_screen.dart';
+import 'package:learnify_client/screens/verfi_screen.dart';
 
 const darkModeBox = 'darkModeTutorial';
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox(darkModeBox);
-    await Hive.openBox('LOGIN_BOX');
+  await Hive.openBox('LOGIN_BOX');
   await Hive.openBox(HiveHelper.token);
 
-    DioHelper.inint();
+  DioHelper.inint();
 
   runApp(const MyApp());
 }
@@ -71,7 +73,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         BlocProvider(
           create: (context) => CarouselCubit(),
         ),
-                BlocProvider(
+        BlocProvider(
           create: (context) => LoginCubit(),
         ),
       ],
@@ -89,5 +91,4 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       ),
     );
   }
-
 }
