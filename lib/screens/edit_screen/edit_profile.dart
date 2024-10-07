@@ -111,7 +111,7 @@ class EditProfile extends StatelessWidget {
                                           width: 1, color: Color(0xFF92929D)))),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 190),
+                              padding: const EdgeInsets.only(top: 140),
                               child: GestureDetector(
                                 onTap: () {
                                   ScaffoldMessenger.of(context)
@@ -119,22 +119,26 @@ class EditProfile extends StatelessWidget {
                                     content: Text('Updated Successfully !'),
                                   ));
                                 },
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 48,
-                                  decoration: ShapeDecoration(
-                                    color: Color(0xFF056AFF),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'Update',
-                                      style: TextStyle(
-                                        color: Color(0xFFFCFCFC),
-                                        fontSize: 16,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w600,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 10.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 48,
+                                    decoration: ShapeDecoration(
+                                      color: Color(0xFF056AFF),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Update',
+                                        style: TextStyle(
+                                          color: Color(0xFFFCFCFC),
+                                          fontSize: 16,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ),
                                   ),
