@@ -34,8 +34,8 @@ void main() async {
   await Hive.openBox(darkModeBox);
   await Hive.openBox('LOGIN_BOX');
   await Hive.openBox(HiveHelper.token);
-    await Hive.openBox(HiveHelper.KEY_BOX_APP_LANGUAGE);
-await Hive.openBox('onboardingBox');
+  await Hive.openBox(HiveHelper.KEY_BOX_APP_LANGUAGE);
+  await Hive.openBox('onboardingBox');
 
   DioHelper.inint();
   final token = HiveHelper.getToken();
@@ -43,10 +43,10 @@ await Hive.openBox('onboardingBox');
 
   if (token != null && token.isNotEmpty) {
     // If the token exists, navigate directly to BottomNav screen
-    initialScreen = BottomNav();
+    initialScreen = const BottomNav();
   } else {
     // Otherwise, show the login screen
-    initialScreen = SignInScreen();
+    initialScreen = const SignInScreen();
   }
 
   runApp(MyApp(initialScreen: initialScreen));
@@ -61,14 +61,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
-  final lightTheme =
-      ThemeData(brightness: Brightness.light, fontFamily: 'Poppins'
-          // primaryColor: Colors.blue,
-          );
+  final lightTheme = ThemeData(brightness: Brightness.light, fontFamily: 'Poppins');
+  final darkTheme = ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins');
 
-  final darkTheme = ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins'
-      // primaryColor: Colors.grey,
-      );
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
