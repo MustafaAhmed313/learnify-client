@@ -263,7 +263,7 @@ class _NewPasswordState extends State<NewPassword> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0, top: 140),
+                  padding: const EdgeInsets.only(bottom: 20.0, top: 85),
                   child: GestureDetector(
                     onTap: () {
                       showDialog(
@@ -311,37 +311,45 @@ class _NewPasswordState extends State<NewPassword> {
   }
 
   Container _buildAlertDialog() {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     return Container(
-      width: 360,
-      height: 340,
+      width: width * 0.8, // 80% of screen width
+      height: height * 0.4, // 40% of screen height
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
         color: Color(0xFFFCFCFC),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(
+              width * 0.06), // Border radius relative to width
         ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: EdgeInsets.only(
+                top: height * 0.02), // Top padding relative to height
             child: Image.asset(
               'assets/images/tick 1.png',
+              width: width * 0.25, // Image width relative to screen width
             ),
           ),
           SizedBox(
-            height: 20,
+            height: height * 0.02, // SizedBox height relative to screen height
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 13.0),
+            padding: EdgeInsets.only(
+                left: width * 0.03), // Left padding relative to width
             child: Row(
               children: [
                 Text(
                   'Congratulation! ',
                   style: TextStyle(
                     color: Color(0xFF056AFF),
-                    fontSize: 18,
+                    fontSize:
+                        width * 0.045, // Font size relative to screen width
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w600,
                   ),
@@ -349,7 +357,8 @@ class _NewPasswordState extends State<NewPassword> {
                 Text(
                   'your password',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize:
+                        width * 0.045, // Font size relative to screen width
                     color: Colors.black,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w600,
@@ -359,11 +368,12 @@ class _NewPasswordState extends State<NewPassword> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 3.0),
+            padding: EdgeInsets.only(
+                left: width * 0.02), // Left padding relative to width
             child: Text(
               'has been changed',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: width * 0.045, // Font size relative to screen width
                 color: Colors.black,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600,
@@ -371,17 +381,21 @@ class _NewPasswordState extends State<NewPassword> {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: height * 0.01, // SizedBox height relative to screen height
           ),
           Expanded(
-            child: Text(
-              textAlign: TextAlign.center,
-              'Try to keep the password away to avoid theft of your account and data',
-              style: TextStyle(
-                color: Color(0xFF92929D),
-                fontSize: 14,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.05), // Padding relative to width
+              child: Text(
+                'Try to keep the password away to avoid theft of your account and data',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xFF92929D),
+                  fontSize: width * 0.035, // Font size relative to screen width
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ),
@@ -390,26 +404,29 @@ class _NewPasswordState extends State<NewPassword> {
               Navigator.pop(context);
             },
             child: Container(
-              width: 262,
-              height: 48,
+              width: width * 0.7, // Button width relative to screen width
+              height: height * 0.06, // Button height relative to screen height
               decoration: ShapeDecoration(
                 color: Color(0xFF056AFF),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(
+                      width * 0.02), // Border radius relative to width
+                ),
               ),
               child: Center(
                 child: Text(
                   'Next',
                   style: TextStyle(
                     color: Color(0xFFFCFCFC),
-                    fontSize: 16,
+                    fontSize:
+                        width * 0.04, // Font size relative to screen width
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
