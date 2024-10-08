@@ -16,22 +16,17 @@ class LoginCubit extends Cubit<LoginState> {
   void login({
     required String email,
     required String password,
-
   }) async {
     emit(LoginLoadingState());
     try {
-      final response = await DioHelper.postData(
-          path: 'login',
-          body: {
-            "email": email,
-            "password": password,
-
-          });
+      final response = await DioHelper.postData(path: 'login', body: {
+        "email": email,
+        "password": password,
+      });
       model = LoginModel.fromJson(response.data);
       if (model.status == true) {
-
         HiveHelper.setToken(model.data?.token ?? "");
-
+         HiveHelper.setValueLoginBox();
         Get.offAll(BottomNav());
 
         emit(LoginSuccessState(model.message ?? ""));

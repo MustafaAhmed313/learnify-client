@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; // Keeping the Bloc import
 import 'package:google_fonts/google_fonts.dart';
 import 'package:learnify_client/screens/verfi_screen.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
@@ -62,11 +62,8 @@ class ForgotPasswordPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 120.0),
-                            child: Divider(
-                                color: Colors
-                                    .grey), // Changed to Divider for clarity
+                            padding: const EdgeInsets.symmetric(horizontal: 120.0),
+                            child: Divider(color: Colors.grey),
                           ),
                           SizedBox(height: 15),
                           Center(
@@ -85,8 +82,7 @@ class ForgotPasswordPage extends StatelessWidget {
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color:
-                                  isDarkMode ? Colors.grey[400] : Colors.grey,
+                              color: isDarkMode ? Colors.grey[400] : Colors.grey,
                             ),
                             textAlign: TextAlign.center,
                           ),
