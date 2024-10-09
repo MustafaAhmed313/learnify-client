@@ -45,6 +45,10 @@ dependencies:
   carousel_slider: ^5.0.0
   smooth_page_indicator: ^1.2.0+3
   dio: ^5.6.0
+  intl: ^0.19.0
+  flutter_localization: ^0.2.2
+
+
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +73,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   assets:

@@ -64,7 +64,9 @@ class ForgotPasswordPage extends StatelessWidget {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 120.0),
-                            child: Divider(color: Colors.grey),
+                            child: Divider(
+                                color: Colors
+                                    .grey), // Changed to Divider for clarity
                           ),
                           SizedBox(height: 15),
                           Center(
@@ -83,8 +85,7 @@ class ForgotPasswordPage extends StatelessWidget {
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color:
-                                  isDarkMode ? Colors.grey[400] : Colors.grey,
+                              color: isDarkMode ? Colors.grey[400] : Colors.grey,
                             ),
                             textAlign: TextAlign.center,
                           ),
