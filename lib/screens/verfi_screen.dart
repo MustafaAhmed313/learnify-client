@@ -48,12 +48,12 @@ class VerfiScreen extends StatelessWidget {
                 child: FractionallySizedBox(
                   heightFactor: 0.45, // Takes up 45% of the screen height
                   child: Container(
-                    padding: EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
                       color: isDarkMode
                           ? Colors.grey[900]
                           : Colors.white, // Background color changes
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
                       ),
@@ -63,7 +63,7 @@ class VerfiScreen extends StatelessWidget {
                               ? Colors.black45
                               : Colors.black26, // Shadow changes
                           blurRadius: 10,
-                          offset: Offset(0, 5),
+                          offset: const Offset(0, 5),
                         ),
                       ],
                     ),
@@ -92,7 +92,7 @@ class VerfiScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             'Select which contact details should we use to reset your password',
                             style: GoogleFonts.poppins(
@@ -106,7 +106,7 @@ class VerfiScreen extends StatelessWidget {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -203,6 +203,10 @@ class VerfiScreen extends StatelessWidget {
         textAlign: TextAlign.center,
         maxLength: 1,
         decoration: InputDecoration(
+          counterStyle: TextStyle(
+            color: isDarkMode? Colors.white : Colors.black
+          ),
+
           counterText: "",
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
@@ -215,7 +219,7 @@ class VerfiScreen extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: Colors.blue,
               width: 3,
             ),
