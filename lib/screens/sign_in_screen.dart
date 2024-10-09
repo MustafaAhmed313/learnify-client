@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learnify_client/cubit/login_cubit.dart';
@@ -12,12 +9,6 @@ import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/forget_pass_screen/for_get_pass.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/sign_in_1.dart';
-
-
-
-
-
-
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -30,6 +21,9 @@ class _SignInScreenState extends State<SignInScreen> {
   late TextEditingController _userPasswordController;
   bool _passwordVisible = false;
 
+  final _emailController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -41,11 +35,9 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void dispose() {
     _userPasswordController.dispose(); // Dispose the controller
+    _emailController.dispose(); // Dispose email controller
     super.dispose();
   }
-
-  final _emailController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -83,20 +75,20 @@ class _SignInScreenState extends State<SignInScreen> {
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(right: 15.0, top: 10),
-                    child: Container(
-                      width: 70,
-                      height: 50,
-                      margin: const EdgeInsets.only(bottom: 15.0),
-                      padding: const EdgeInsets.all(3.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.to(BottomNav());
-                          },
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(BottomNav());
+                      },
+                      child: Container(
+                        width: 70,
+                        height: 50,
+                        margin: const EdgeInsets.only(bottom: 15.0),
+                        padding: const EdgeInsets.all(3.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: Center(
                           child: Text(
                             'guest',
                             style: GoogleFonts.poppins(
@@ -274,10 +266,11 @@ class _SignInScreenState extends State<SignInScreen> {
                               decoration: InputDecoration(
                                 hintText: 'Enter your password',
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderRadius: BorderRadius.circular(
+                                      8.0), // Rounded border
                                   borderSide: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 2.0,
+                                    color: Colors.grey, // Border color
+                                    width: 2.0, // Border width
                                   ),
                                 ),
                                 suffixIcon: IconButton(
@@ -297,7 +290,6 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                         ),
-                        // "Remember Me" and "Forgot Password?" Row
                         Row(
                           children: [
                             Padding(
@@ -343,12 +335,11 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ],
                         ),
-                        // BlocBuilder and ElevatedButton for Login
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: SizedBox(
                             height: 48,
-                            width: double.infinity,
+                            width: double.infinity, // Full width
                             child: BlocBuilder<LoginCubit, LoginState>(
                               builder: (context, state) {
                                 if (state is LoginLoadingState) {
@@ -360,12 +351,13 @@ class _SignInScreenState extends State<SignInScreen> {
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
                                       context.read<LoginCubit>().login(
-                                            email: _emailController.text,
-                                            password:
-                                                _userPasswordController.text,
-                                          );
+                                          email: _emailController.text,
+                                          password:
+                                              _userPasswordController.text);
                                       HiveHelper.setValueLoginBox();
                                     }
+                                    // Button action here
+                                    print('Button Pressed');
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor:
@@ -396,7 +388,6 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                         ),
-                        // "Don't have an account?" Row
                         Row(
                           children: [
                             Padding(
@@ -420,10 +411,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                 "Sign Up",
                                 style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.blue,
-                                  ),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blue),
                                 ),
                               ),
                             ),
@@ -434,7 +424,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           ],
                         ),
                         SizedBox(height: 20),
-                        // Social login section
                         const Row(
                           children: [
                             Expanded(
@@ -454,7 +443,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               .spaceEvenly, // Distribute icons evenly
                           children: [
                             // Google Icon with border
-                            Flexible(
+                            Expanded(
                               child: Container(
                                 padding: EdgeInsets.all(15.0),
                                 decoration: BoxDecoration(
@@ -472,7 +461,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             SizedBox(width: 10), // Spacing between icons
 
                             // Facebook Icon with border
-                            Flexible(
+                            Expanded(
                               child: Container(
                                 padding: EdgeInsets.all(15.0),
                                 decoration: BoxDecoration(
@@ -490,7 +479,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             SizedBox(width: 10), // Spacing between icons
 
                             // Apple Icon with border
-                            Flexible(
+                            Expanded(
                               child: Container(
                                 padding: EdgeInsets.all(15.0),
                                 decoration: BoxDecoration(

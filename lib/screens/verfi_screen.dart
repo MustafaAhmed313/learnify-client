@@ -42,7 +42,7 @@ class VerfiScreen extends StatelessWidget {
                 ),
               ),
 
-              // Foreground Content placed inside a Container similar to the first uploaded image
+              // Foreground Content
               Align(
                 alignment: Alignment.bottomCenter,
                 child: FractionallySizedBox(
@@ -116,13 +116,11 @@ class VerfiScreen extends StatelessWidget {
                               otpBox(isDarkMode),
                             ],
                           ),
-                          SizedBox(
-                            height: screenHeight * .02,
-                          ),
+                          SizedBox(height: screenHeight * 0.02),
                           Padding(
                             padding: EdgeInsets.only(
-                                left: screenWidth * .20,
-                                top: screenHeight * .02),
+                                left: screenWidth * 0.20,
+                                top: screenHeight * 0.02),
                             child: Row(
                               children: [
                                 Text(
@@ -148,9 +146,7 @@ class VerfiScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: screenHeight * .07,
-                          ),
+                          SizedBox(height: screenHeight * 0.07),
                           SizedBox(
                             height: 48,
                             child: ElevatedButton(
