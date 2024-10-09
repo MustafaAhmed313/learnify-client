@@ -5,9 +5,6 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:learnify_client/new_pass_screen.dart';
 
-import 'package:learnify_client/screens/Congratulation_screen.dart';
-import 'package:learnify_client/screens/SuccessPage.dart';
-import 'package:learnify_client/screens/Verification_screen1.dart';
 import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/dio_helper.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
