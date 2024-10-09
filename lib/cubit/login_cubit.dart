@@ -19,7 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
   }) async {
     emit(LoginLoadingState());
     try {
-      final response = await DioHelper.postData(path: 'login', body: {
+      final response = await DioHelper.postData(path: '/auth/signin', body: {
         "email": email,
         "password": password,
       });
@@ -27,7 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
       if (model.status == true) {
         HiveHelper.setToken(model.data?.token ?? "");
          HiveHelper.setValueLoginBox();
-        Get.offAll(BottomNav());
+        Get.offAll(const BottomNav());
 
         emit(LoginSuccessState(model.message ?? ""));
       } else {
@@ -36,7 +36,7 @@ class LoginCubit extends Cubit<LoginState> {
         );
       }
     } catch (e) {
-      emit(LoginErorrState("Connection is bad "));
+      emit(LoginErorrState("Connection is bad!"));
     }
   }
 }

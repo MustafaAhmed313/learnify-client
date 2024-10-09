@@ -1,14 +1,14 @@
-class LoginModel {
+class RegisterModel {
   bool? status;
   String? message;
-  LoginData? data;
+  RegisterData? data;
 
-  LoginModel({this.status, this.message, this.data});
+  RegisterModel({this.status, this.message, this.data});
 
-  LoginModel.fromJson(Map<String, dynamic> json) {
+  RegisterModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? LoginData.fromJson(json['data']) : null;
+    data = json['data'] != null ? RegisterData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,7 +22,7 @@ class LoginModel {
   }
 }
 
-class LoginData {
+class RegisterData {
   String? id;
   String? name;
   String? email;
@@ -30,8 +30,7 @@ class LoginData {
   String? password;
   String? otp;
   String? token;
-
-  LoginData({
+  RegisterData({
     this.id,
     this.name,
     this.email,
@@ -41,7 +40,7 @@ class LoginData {
     this.token
   });
 
-  LoginData.fromJson(Map<String, dynamic> json) {
+  RegisterData.fromJson(Map<String, dynamic> json) {
     name = json['username'];
     email = json['email'];
     phone = json['phone'];
