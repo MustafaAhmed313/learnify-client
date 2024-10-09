@@ -301,13 +301,6 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                             ),
                             const Spacer(),
-                            Text(
-                              "Forgot Password?",
-                              style: GoogleFonts.poppins(
-                                textStyle: const TextStyle(
-                            SizedBox(
-                              width: screenWidth * .18,
-                            ),
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -393,23 +386,13 @@ class _SignInScreenState extends State<SignInScreen> {
                                 textStyle: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.grey),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 35.0),
-                              child: Text(
-                                "Don't have an account? ",
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
+                                    color: Colors.grey
+                                )
+                              )
                             ),
                             GestureDetector(
                               onTap: () {
-                                Get.to(SignUpScreen());
+                                Get.to(const SignUpScreen());
                               },
                               child: Text(
                                 "Sign Up",
@@ -466,28 +449,28 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(width: 10), // Spacing between icons
+                            const SizedBox(width: 10), // Spacing between icons
                             // Facebook Icon with border
                             Expanded(
                               child: Container(
-                                padding: EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.all(15.0),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.grey, width: 1.0),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.facebook,
                                   color: Colors.blue,
                                   size: 35,
                                 ),
                               ),
                             ),
-                            SizedBox(width: 10), // Spacing between icons
+                            const SizedBox(width: 10), // Spacing between icons
                             // Apple Icon with border
                             Expanded(
                               child: Container(
-                                padding: EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.all(15.0),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.grey, width: 1.0),
