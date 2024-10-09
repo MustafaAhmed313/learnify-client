@@ -30,3 +30,4 @@ List<CtegoriesModel> ctegoriesModel = [
     icon: Icons.bar_chart_outlined,
   ),
 ];
+

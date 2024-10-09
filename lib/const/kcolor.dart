@@ -6,4 +6,5 @@ class Kcolor {
   static const Color blue = Color(0xff056AFF);
   static const Color white = Color(0xffFFFFFF);
   static const Color grey = Color(0xfff5f6f6);
+  static const Color black = Color(0xff151515);
 }
