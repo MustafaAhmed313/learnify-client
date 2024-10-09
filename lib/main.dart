@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-
+import 'package:learnify_client/new_pass_screen.dart';
 
 import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/dio_helper.dart';
@@ -14,6 +14,7 @@ import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 
 
 import 'package:learnify_client/screens/change_pass_screen/cubit/validate_password_cubit.dart';
+import 'package:learnify_client/screens/forget_pass_screen/for_get_pass.dart';
 
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
 import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
@@ -23,9 +24,14 @@ import 'package:learnify_client/screens/profile_mentor_screen/cubit/tab_change_c
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/sign_in_screen.dart';
+import 'package:learnify_client/screens/succss_add_pass_screen.dart';
+
+import 'package:learnify_client/screens/verfi_screen.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:learnify_client/screens/sign_up_screen/register_cubit.dart';
 import 'package:learnify_client/screens/splash/splash_screen.dart';
+
 
 const darkModeBox = 'darkModeTutorial';
 void main() async {
@@ -37,6 +43,8 @@ void main() async {
   await Hive.openBox('onboardingBox');
 
   DioHelper.inint();
+
+
   final token = HiveHelper.getToken();
   Widget initialScreen;
 
@@ -47,6 +55,7 @@ void main() async {
     // Otherwise, show the login screen
     initialScreen = const SignInScreen();
   }
+
 
   runApp(MyApp(initialScreen: initialScreen));
 }
