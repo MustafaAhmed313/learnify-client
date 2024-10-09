@@ -49,7 +49,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                             style: TextStyle(
                               color: cubit.tabController.index == 0
                                   ? Kcolor.mainColor
-                                  : Color(0xFF92929D),
+                                  : const Color(0xFF92929D),
                               fontSize: width * 0.04,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w500,
@@ -63,7 +63,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                             width: width * 0.45,
                             color: cubit.tabController.index == 0
                                 ? Kcolor.mainColor
-                                : Color(0xFF92929D),
+                                : const Color(0xFF92929D),
                           )
                         ],
                       ),
@@ -80,7 +80,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                             style: TextStyle(
                               color: cubit.tabController.index == 1
                                   ? Kcolor.mainColor
-                                  : Color(0xFF92929D),
+                                  : const Color(0xFF92929D),
                               fontSize: width * 0.04,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w500,
@@ -94,7 +94,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                             width: width * 0.4,
                             color: cubit.tabController.index == 1
                                 ? Kcolor.mainColor
-                                : Color(0xFF92929D),
+                                : const Color(0xFF92929D),
                           )
                         ],
                       ),
@@ -122,10 +122,12 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                                 horizontal: width * 0.04,
                                 vertical: height * 0.01),
                             decoration: ShapeDecoration(
-                              color: Color(0xFF056AFF),
+                              color: const Color(0xFF056AFF),
                               shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                    width: 1, color: Color(0xFF056AFF)),
+                                side: const BorderSide(
+                                    width: 1,
+                                    color: Color(0xFF056AFF)
+                                ),
                                 borderRadius: BorderRadius.circular(32),
                               ),
                             ),
@@ -153,8 +155,9 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                             decoration: ShapeDecoration(
                               color: Colors.white,
                               shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                    width: 1, color: Color(0xFF056AFF)),
+                                side: const BorderSide(
+                                    width: 1,
+                                    color: Color(0xFF056AFF)),
                                 borderRadius: BorderRadius.circular(32),
                               ),
                             ),
@@ -162,7 +165,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                               child: Text(
                                 'Service',
                                 style: TextStyle(
-                                  color: Color(0xFF056AFF),
+                                  color: const Color(0xFF056AFF),
                                   fontSize: width * 0.04,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w500,
@@ -180,15 +183,14 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                           height: height * 0.06,
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(8),
-                                  bottomLeft: Radius.circular(8))),
+                              borderRadius: BorderRadius.circular(8),
+                          ),
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 height: height * 0.06,
                                 width: width * 0.75,
-                                child: TextField(
+                                child: const TextField(
                                   decoration: InputDecoration(
                                     hintText: 'Search',
                                     hintStyle: TextStyle(
@@ -199,21 +201,22 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(8),
-                                            bottomLeft: Radius.circular(8)),
+                                            bottomLeft: Radius.circular(8)
+                                        ),
                                         borderSide: BorderSide.none),
                                   ),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Container(
                                 width: height * 0.06,
                                 height: height * 0.06,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     color: Color(0xFF056AFF),
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(8),
                                         bottomRight: Radius.circular(8))),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.mic_none_outlined,
                                   color: Colors.white,
                                 ),

@@ -4,9 +4,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import 'package:learnify_client/screens/Congratulation_screen.dart';
-import 'package:learnify_client/screens/SuccessPage.dart';
-import 'package:learnify_client/screens/Verification_screen1.dart';
+
 import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/dio_helper.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
@@ -26,6 +24,7 @@ import 'package:learnify_client/screens/setting_content/cubit/setting_content_cu
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/sign_in_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:learnify_client/screens/sign_up_screen/register_cubit.dart';
 import 'package:learnify_client/screens/splash/splash_screen.dart';
 
 const darkModeBox = 'darkModeTutorial';
@@ -88,6 +87,9 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         ),
         BlocProvider(
           create: (context) => LoginCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RegisterCubit(),
         ),
         BlocProvider(
           create: (context) => LanguageCubit(),
