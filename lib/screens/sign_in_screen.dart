@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
-
 import 'package:learnify_client/screens/forget_pass_screen/for_get_pass.dart';
-
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
-
 import 'package:learnify_client/screens/sign_in_1.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -25,6 +21,9 @@ class _SignInScreenState extends State<SignInScreen> {
   late TextEditingController _userPasswordController;
   bool _passwordVisible = false;
 
+  final _emailController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -36,11 +35,10 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void dispose() {
     _userPasswordController.dispose(); // Dispose the controller
+    _emailController.dispose(); // Dispose email controller
     super.dispose();
   }
 
-  final _emailController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -49,10 +47,9 @@ class _SignInScreenState extends State<SignInScreen> {
       debugShowCheckedModeBanner: false,
       home: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
-          // TODO: implement listener
           if (state is LoginErorrState) {
             Get.snackbar(
-              "Erorr",
+              "Error",
               state.msg,
               backgroundColor: Colors.red,
               colorText: Colors.white,
@@ -78,20 +75,20 @@ class _SignInScreenState extends State<SignInScreen> {
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(right: 15.0, top: 10),
-                    child: Container(
-                      width: 70,
-                      height: 50,
-                      margin: const EdgeInsets.only(bottom: 15.0),
-                      padding: const EdgeInsets.all(3.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.to(BottomNav());
-                          },
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(BottomNav());
+                      },
+                      child: Container(
+                        width: 70,
+                        height: 50,
+                        margin: const EdgeInsets.only(bottom: 15.0),
+                        padding: const EdgeInsets.all(3.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: Center(
                           child: Text(
                             'guest',
                             style: GoogleFonts.poppins(
@@ -128,11 +125,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                         text: 'Welcome ',
                                         style: GoogleFonts.poppins(
                                           textStyle: TextStyle(
-                                              fontSize: 32,
-                                              fontWeight: FontWeight.w600,
-                                              color: cubit.isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black),
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.w600,
+                                            color: cubit.isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                          ),
                                         ),
                                       ),
                                       TextSpan(
@@ -306,88 +304,38 @@ class _SignInScreenState extends State<SignInScreen> {
                               "Remember Me",
                               style: GoogleFonts.poppins(
                                 textStyle: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.grey),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ),
                             SizedBox(
                               width: screenWidth * .18,
                             ),
-                            Text(
-                              "Forgot Password?",
-                              style: GoogleFonts.poppins(
-                                textStyle: const TextStyle(
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ForgotPasswordPage(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Forgot Password?",
+                                style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.blue),
+                                    color: Colors.blue,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
                         ),
                         Padding(
-
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.check_box_outline_blank,
-                            size: 30,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Text(
-                          "Remember Me",
-                          style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey),
-                          ),
-                        ),
-                        SizedBox(
-                          width: screenWidth * .18,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ForgotPasswordPage()),
-                            );
-                          },
-                          child: Text(
-                            "Forgot Password?",
-                            style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.blue),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: SizedBox(
-                        height: 48,
-                        width: double.infinity, // Full width
-                        child: BlocBuilder<LoginCubit, LoginState>(
-                          builder: (context, state) {
-                            if (state is LoginLoadingState) {
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                            return ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  context.read<LoginCubit>().login(
-                                      email: _emailController.text,
-                                      password: _userPasswordController.text);
-                                  setState(() {
-                                    HiveHelper.setValueLoginBox();
-                                  });
-
                           padding: const EdgeInsets.all(16.0),
                           child: SizedBox(
                             height: 48,
@@ -398,7 +346,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                   return Center(
                                     child: CircularProgressIndicator(),
                                   );
-
                                 }
                                 return ElevatedButton(
                                   onPressed: () {
@@ -407,38 +354,33 @@ class _SignInScreenState extends State<SignInScreen> {
                                           email: _emailController.text,
                                           password:
                                               _userPasswordController.text);
-                                      setState(() {
-                                        HiveHelper.setValueLoginBox();
-                                      });
+                                      HiveHelper.setValueLoginBox();
                                     }
                                     // Button action here
                                     print('Button Pressed');
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color.fromARGB(255,
-                                        5, 106, 255), // Button background color
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 5, 106, 255),
                                     foregroundColor: Colors.white, // Text color
                                     padding: const EdgeInsets.symmetric(
-                                        vertical:
-                                            10), // Adjusted padding (reduced vertical padding)
+                                        vertical: 10),
                                     textStyle: const TextStyle(
-                                      fontSize:
-                                          16, // Reduced font size to fit text better
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          8.0), // Adjust radius here
+                                      borderRadius: BorderRadius.circular(8.0),
                                     ),
                                   ),
                                   child: Text(
                                     'Login',
                                     style: GoogleFonts.poppins(
                                       textStyle: const TextStyle(
-                                          fontSize:
-                                              16, // Keep the size a bit smaller to fit
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.white),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 );
@@ -451,12 +393,13 @@ class _SignInScreenState extends State<SignInScreen> {
                             Padding(
                               padding: const EdgeInsets.only(left: 35.0),
                               child: Text(
-                                "Don't have an acount? ",
+                                "Don't have an account? ",
                                 style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.grey),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
                             ),
@@ -477,35 +420,27 @@ class _SignInScreenState extends State<SignInScreen> {
                             Icon(
                               Icons.north_east,
                               color: Colors.blue,
-                            )
+                            ),
                           ],
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        SizedBox(height: 20),
                         const Row(
                           children: [
                             Expanded(
                               child: Divider(color: Colors.grey, thickness: 1),
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
+                            SizedBox(width: 10),
                             Text("Log in with"),
-                            SizedBox(
-                              width: 10,
-                            ),
+                            SizedBox(width: 10),
                             Expanded(
                               child: Divider(color: Colors.grey, thickness: 1),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SizedBox(height: 15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment
-                              .spaceEvenly, // Space icons evenly
+                              .spaceEvenly, // Distribute icons evenly
                           children: [
                             // Google Icon with border
                             Expanded(
@@ -513,32 +448,26 @@ class _SignInScreenState extends State<SignInScreen> {
                                 padding: EdgeInsets.all(15.0),
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: Colors.grey, // Border color
-                                    width: 1.0, // Border width
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                      8.0), // Rounded corners
+                                      color: Colors.grey, width: 1.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 child: Icon(
                                   FontAwesomeIcons.google,
-                                  color: Colors
-                                      .red, // You can adjust the color if needed
+                                  color: Colors.red,
                                   size: 35,
                                 ),
                               ),
                             ),
                             SizedBox(width: 10), // Spacing between icons
+
                             // Facebook Icon with border
                             Expanded(
                               child: Container(
                                 padding: EdgeInsets.all(15.0),
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: Colors.grey, // Border color
-                                    width: 1.0, // Border width
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                      8.0), // Rounded corners
+                                      color: Colors.grey, width: 1.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 child: Icon(
                                   Icons.facebook,
@@ -548,17 +477,15 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                             ),
                             SizedBox(width: 10), // Spacing between icons
+
                             // Apple Icon with border
                             Expanded(
                               child: Container(
                                 padding: EdgeInsets.all(15.0),
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: Colors.grey, // Border color
-                                    width: 1.0, // Border width
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                      8.0), // Rounded corners
+                                      color: Colors.grey, width: 1.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 child: Icon(
                                   Icons.apple,
