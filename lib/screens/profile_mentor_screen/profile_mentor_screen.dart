@@ -5,7 +5,6 @@ import 'package:learnify_client/screens/profile_mentor_screen/cubit/tab_change_c
 import 'package:learnify_client/screens/profile_mentor_screen/widgets/profile_app_bar.dart';
 import 'package:learnify_client/screens/profile_mentor_screen/widgets/measured_title.dart';
 import 'package:learnify_client/screens/profile_mentor_screen/widgets/tab_button.dart';
-import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
 
 import '../../const/app_font_sizes.dart';
@@ -17,7 +16,6 @@ class ProfileMentorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<TabChangeCubit>();
-    final switchCubit = context.read<SwitchCubit>();
 
     return Scaffold(
       appBar: profileAppBar(),

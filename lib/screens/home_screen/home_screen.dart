@@ -7,11 +7,48 @@ import 'package:learnify_client/screens/courses/course_detail.dart';
 import 'package:learnify_client/screens/courses/courses_screen.dart';
 import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
 import 'package:learnify_client/screens/home_screen/models/ctegories_model.dart';
+import 'package:learnify_client/screens/home_screen/models/featured_model.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
 // ignore: must_be_immutable
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController searchController = TextEditingController();
+  List<FeaturedModel> featured = [];
+  List<FeaturedModel> allFeatured = featuredModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    featured = allFeatured;
+    searchController.addListener(() {
+      filteredSearchResults(searchController.text);
+    });
+
+    super.initState();
+  }
+
+  void filteredSearchResults(String query) {
+    List<FeaturedModel> tempList = [];
+    if (query.isNotEmpty) {
+      tempList = allFeatured
+          .where((item) =>
+              item.description!.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    } else {
+      tempList = allFeatured;
+    }
+
+    setState(() {
+      featured = tempList;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +163,7 @@ class HomeScreen extends StatelessWidget {
                                     ],
                                   ),
                                   child: TextField(
+                                    controller: searchController,
                                     decoration: InputDecoration(
                                       hintText: ' Search something...',
                                       hintStyle: TextStyle(
@@ -198,124 +236,6 @@ class HomeScreen extends StatelessWidget {
                           return _buildCategory(ctegoriesModel[index], context);
                         },
                       ),
-                      // SizedBox(
-                      //   height: height * 0.08,
-                      //   child: ListView.separated(
-                      //       scrollDirection: Axis.horizontal,
-                      //       itemBuilder: (c, i) =>
-                      //           _buildCategories(ctegoriesModel[i], context),
-                      //       separatorBuilder: (c, i) => SizedBox(
-                      //             width: width * 0.025,
-                      //           ),
-                      //       itemCount: ctegoriesModel.length),
-                      // ),
-                      // SizedBox(
-                      //   height: height * 0.017,
-                      // ),
-                      // Row(
-                      //   children: [
-                      //     Text(
-                      //       'Best Offers',
-                      //       style: TextStyle(
-                      //         fontSize: 14,
-                      //         fontFamily: 'Poppins',
-                      //         fontWeight: FontWeight.w600,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      // SizedBox(
-                      //   height: height * 0.017,
-                      // ),
-                      // CarouselSlider(
-                      //   items: List.generate(
-                      //     4,
-                      //     (index) => Container(
-                      //       height: height * 0.12,
-                      //       width: double.infinity,
-                      //       decoration: ShapeDecoration(
-                      //         color:
-                      //             Colors.black.withOpacity(0.20000000298023224),
-                      //         shape: RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.circular(4)),
-                      //       ),
-                      //     ),
-                      //   ),
-                      //   carouselController: cubit.carouselController,
-                      //   options: CarouselOptions(
-                      //       height: height * 0.1,
-                      //       aspectRatio: 16 / 9,
-                      //       viewportFraction: 1,
-                      //       initialPage: 0,
-                      //       enableInfiniteScroll: true,
-                      //       reverse: false,
-                      //       autoPlay: true,
-                      //       autoPlayInterval: Duration(seconds: 3),
-                      //       autoPlayAnimationDuration:
-                      //           Duration(milliseconds: 800),
-                      //       autoPlayCurve: Curves.fastOutSlowIn,
-                      //       enlargeCenterPage: true,
-                      //       enlargeFactor: 0.3,
-                      //       scrollDirection: Axis.horizontal,
-                      //       onPageChanged: (index, reason) {
-                      //         cubit.onPageChange(index);
-                      //       }),
-                      // ),
-                      // SizedBox(
-                      //   height: height * 0.015,
-                      // ),
-                      // SmoothPageIndicator(
-                      //   controller:
-                      //       PageController(initialPage: cubit.currentIndex),
-                      //   count: 4,
-                      //   effect: WormEffect(
-                      //     dotHeight: width * 0.023,
-                      //     dotWidth: width * 0.023,
-                      //     type: WormType.thinUnderground,
-                      //   ),
-                      //   onDotClicked: (index) {
-                      //     cubit.carouselController.animateToPage(index);
-                      //   },
-                      // ),
-                      // SizedBox(
-                      //   height: height * 0.01,
-                      // ),
-                      // Row(
-                      //   children: [
-                      //     Text(
-                      //       'Popular courses',
-                      //       style: TextStyle(
-                      //         fontSize: 14,
-                      //         fontFamily: 'Poppins',
-                      //         fontWeight: FontWeight.w600,
-                      //       ),
-                      //     ),
-                      //     Spacer(),
-                      //     Text(
-                      //       'See All',
-                      //       style: TextStyle(
-                      //         color: Color(0xFF056AFF),
-                      //         fontSize: 12,
-                      //         fontFamily: 'Poppins',
-                      //         fontWeight: FontWeight.w500,
-                      //         decoration: TextDecoration.underline,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      // SizedBox(
-                      //   height: height * 0.016,
-                      // ),
-                      // Container(
-                      //   height: height * 0.1,
-                      //   width: double.infinity,
-                      //   decoration: ShapeDecoration(
-                      //     color: Colors.black.withOpacity(0.20000000298023224),
-                      //     shape: RoundedRectangleBorder(
-                      //         borderRadius: BorderRadius.circular(4)),
-                      //   ),
-                      // ),
-
                       SizedBox(
                         height: height * 0.03,
                       ),
@@ -350,14 +270,15 @@ class HomeScreen extends StatelessWidget {
                         height: height * 0.02,
                       ),
                       SizedBox(
-                        height: height * 0.37,
+                        height: height * 0.38,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
-                          itemBuilder: (c, i) => _buildFeaturedCourses(context),
+                          itemBuilder: (c, i) =>
+                              _buildFeaturedCourses(context, featured[i]),
                           separatorBuilder: (c, i) => SizedBox(
                             width: width * 0.05,
                           ),
-                          itemCount: 3,
+                          itemCount: featured.length,
                         ),
                       ),
                       SizedBox(
@@ -374,7 +295,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFeaturedCourses(BuildContext context) {
+  Widget _buildFeaturedCourses(BuildContext context, FeaturedModel model) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return BlocBuilder<SwitchCubit, SwitchState>(
@@ -410,21 +331,29 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: height * 0.01,
                   ),
-                  Container(
-                    height: height * 0.035,
-                    width: width * 0.25,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
-                      color: Kcolor.mainColor,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'UI/UX Design',
-                        style: TextStyle(
-                          color: Colors.white,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        height: height * 0.035,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                          color: Kcolor.mainColor,
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(right: 10.0, left: 10),
+                            child: Text(
+                              model.title!,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                   SizedBox(
                     height: height * 0.01,
@@ -435,7 +364,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            'User Interface Design Essentials',
+                            model.description!,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -448,31 +377,32 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      SizedBox(
-                        width: height * 0.01,
-                      ),
-                      Text(
-                        '4.9 (80 Reviews)',
-                        style: TextStyle(fontSize: 11),
-                      ),
-                      Spacer(),
-                      Text(
-                        '\$75',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                  Spacer(),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: height * 0.018),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.amber,
                         ),
-                      )
-                    ],
-                  )
+                        SizedBox(
+                          width: height * 0.01,
+                        ),
+                        Text(
+                          '4.9 (80 Reviews)',
+                          style: TextStyle(fontSize: 11),
+                        ),
+                        Spacer(),
+                        Text(
+                          '\$75',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -538,43 +468,4 @@ class HomeScreen extends StatelessWidget {
       },
     );
   }
-
-  // Expanded _buildCategories(CtegoriesModel model, BuildContext context) {
-  //   final height = MediaQuery.of(context).size.height;
-  //   final width = MediaQuery.of(context).size.width;
-
-  //   return Expanded(
-  //     child: Container(
-  //       height: height * 0.1,
-  //       padding: EdgeInsets.symmetric(
-  //           horizontal: width * 0.03, vertical: height * 0.01),
-  //       decoration: ShapeDecoration(
-  //         shape: RoundedRectangleBorder(
-  //           side: BorderSide(width: 1, color: Color(0xFF92929D)),
-  //           borderRadius: BorderRadius.circular(4),
-  //         ),
-  //       ),
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //         children: [
-  //           model.name == 'Business'
-  //               ? Icon(
-  //                   Icons.lightbulb_outline,
-  //                   color: Colors.grey,
-  //                 )
-  //               : Image.asset(model.image!),
-  //           Text(
-  //             model.name!,
-  //             style: TextStyle(
-  //               color: Color(0xFF92929D),
-  //               fontSize: 14,
-  //               fontFamily: 'Poppins',
-  //               fontWeight: FontWeight.w400,
-  //             ),
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }

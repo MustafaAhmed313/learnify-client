@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
 import 'package:learnify_client/screens/courses/models/lessons_model.dart';
+import 'package:learnify_client/screens/payment/payment_screen.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
 class CourseDetail extends StatefulWidget {
@@ -244,19 +245,24 @@ class _CourseDetailState extends State<CourseDetail> {
                       SizedBox(
                         height: height * 0.015,
                       ),
-                      Container(
-                        height: height * 0.07,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Kcolor.mainColor,
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Buy Now',
-                            style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.white,
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(PaymentScreen());
+                        },
+                        child: Container(
+                          height: height * 0.07,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Kcolor.mainColor,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Buy Now',
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
