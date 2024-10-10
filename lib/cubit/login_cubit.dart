@@ -19,7 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
   }) async {
     emit(LoginLoadingState());
     try {
-      final response = await DioHelper.postData(path: '/auth/signin', body: {
+      final response = await DioHelper.postData(path: 'login', body: {
         "email": email,
         "password": password,
       });

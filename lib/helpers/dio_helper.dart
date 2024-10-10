@@ -8,7 +8,7 @@ class DioHelper {
   static inint() {
     _dio = Dio(
       BaseOptions(
-          baseUrl: 'https://learnify-app-api.vercel.app/api',
+          baseUrl: 'https://student.valuxapps.com/api/',
           receiveTimeout: const Duration(seconds: 120),
           headers: {"lang": "ar", "Content-Type": "application/json"}),
     );
