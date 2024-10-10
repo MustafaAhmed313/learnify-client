@@ -20,8 +20,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   }) async {
     emit(RegisterLoadingState());
     try {
-      final response = await DioHelper.postData(path: '/auth/signup', body: {
-        "username": username,
+      final response = await DioHelper.postData(path: 'register', body: {
+        "name": username,
         "phone": phone,
         "email": email,
         "password": password,

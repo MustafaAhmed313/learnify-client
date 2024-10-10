@@ -1,20 +1,20 @@
 class RegisterModel {
   bool? status;
   String? message;
-  RegisterData? data;
+  Data? data;
 
   RegisterModel({this.status, this.message, this.data});
 
   RegisterModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? RegisterData.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['message'] = this.message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -22,43 +22,33 @@ class RegisterModel {
   }
 }
 
-class RegisterData {
-  String? id;
+class Data {
   String? name;
-  String? email;
   String? phone;
-  String? password;
-  String? otp;
+  String? email;
+  int? id;
+  String? image;
   String? token;
-  RegisterData({
-    this.id,
-    this.name,
-    this.email,
-    this.phone,
-    this.password,
-    this.otp,
-    this.token
-  });
 
-  RegisterData.fromJson(Map<String, dynamic> json) {
-    name = json['username'];
-    email = json['email'];
+  Data({this.name, this.phone, this.email, this.id, this.image, this.token});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
     phone = json['phone'];
-    password = json['password'];
-    id = json['_id'];
-    otp = json['otp'];
+    email = json['email'];
+    id = json['id'];
+    image = json['image'];
     token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['username'] = name;
-    data['email'] = email;
-    data['phone'] = phone;
-    data['password'] = password;
-    data['_id'] = id;
-    data['token'] = token;
-    data['otp'] = otp;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['phone'] = this.phone;
+    data['email'] = this.email;
+    data['id'] = this.id;
+    data['image'] = this.image;
+    data['token'] = this.token;
     return data;
   }
 }
