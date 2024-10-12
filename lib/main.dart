@@ -12,7 +12,6 @@ import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/language_cubit/language_cubit.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 
-
 import 'package:learnify_client/screens/change_pass_screen/cubit/validate_password_cubit.dart';
 import 'package:learnify_client/screens/forget_pass_screen/for_get_pass.dart';
 
@@ -32,7 +31,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:learnify_client/screens/sign_up_screen/register_cubit.dart';
 import 'package:learnify_client/screens/splash/splash_screen.dart';
 
-
 const darkModeBox = 'darkModeTutorial';
 void main() async {
   await Hive.initFlutter();
@@ -41,9 +39,9 @@ void main() async {
   await Hive.openBox(HiveHelper.token);
   await Hive.openBox(HiveHelper.KEY_BOX_APP_LANGUAGE);
   await Hive.openBox('onboardingBox');
+  await Hive.openBox('USER_BOX');
 
   DioHelper.inint();
-
 
   final token = HiveHelper.getToken();
   Widget initialScreen;
@@ -55,7 +53,6 @@ void main() async {
     // Otherwise, show the login screen
     initialScreen = const SignInScreen();
   }
-
 
   runApp(MyApp(initialScreen: initialScreen));
 }
@@ -69,8 +66,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
-  final lightTheme = ThemeData(brightness: Brightness.light, fontFamily: 'Poppins');
-  final darkTheme = ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins');
+  final lightTheme =
+      ThemeData(brightness: Brightness.light, fontFamily: 'Poppins');
+  final darkTheme =
+      ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins');
 
   @override
   Widget build(BuildContext context) {

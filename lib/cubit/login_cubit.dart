@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:hive/hive.dart';
 import 'package:learnify_client/helpers/dio_helper.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/login_model.dart';
@@ -26,7 +27,10 @@ class LoginCubit extends Cubit<LoginState> {
       model = LoginModel.fromJson(response.data);
       if (model.status == true) {
         HiveHelper.setToken(model.data?.token ?? "");
-         HiveHelper.setValueLoginBox();
+        HiveHelper.setValueLoginBox();
+         var box = Hive.box('USER_BOX');
+        box.put('username', model.data?.name); 
+        box.put('email', model.data?.email);
         Get.offAll(const BottomNav());
 
         emit(LoginSuccessState(model.message ?? ""));

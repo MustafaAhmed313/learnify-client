@@ -386,6 +386,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       onPressed: () {
                                         if (_formKey.currentState!.validate()) {
                                           context.read<RegisterCubit>().Register(
+                                            
                                               phone: _phoneNumberController.text,
                                               username: _nameController.text,
                                               email: _emailController.text,
