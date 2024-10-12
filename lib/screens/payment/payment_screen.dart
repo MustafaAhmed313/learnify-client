@@ -1,8 +1,13 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -12,7 +17,7 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  String _selectedCard = '';
+  String _selectedCard = 'Master Card';
   int itemTotal = 75;
   int discount = 2;
 
@@ -164,34 +169,45 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 SizedBox(
                   height: height * 0.015,
                 ),
-                Container(
-                  height: height * 0.077,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Kcolor.mainColor,
-                      width: 1,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        CupertinoIcons.plus_circled,
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                        child: _buildBottomDialogSheet(height, width),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: height * 0.077,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
                         color: Kcolor.mainColor,
+                        width: 1,
                       ),
-                      SizedBox(
-                        width: width * 0.02,
-                      ),
-                      Text(
-                        'Add New Card',
-                        style: TextStyle(
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          CupertinoIcons.plus_circled,
                           color: Kcolor.mainColor,
-                          fontSize: 15,
                         ),
-                      )
-                    ],
+                        SizedBox(
+                          width: width * 0.02,
+                        ),
+                        Text(
+                          'Add New Card',
+                          style: TextStyle(
+                            color: Kcolor.mainColor,
+                            fontSize: 15,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -283,6 +299,306 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildBottomDialogSheet(double height, double width) {
+    return BlocBuilder<SwitchCubit, SwitchState>(
+      builder: (context, state) {
+        final cubit = context.read<SwitchCubit>();
+        return Container(
+            height: height * 0.52,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: cubit.isDarkMode ? Kcolor.black : Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 15, left: 15),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: height * 0.016,
+                  ),
+                  Text(
+                    'Add New Card',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * 0.005,
+                  ),
+                  Text(
+                    'Add your card details here',
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * 0.025,
+                  ),
+                  Container(
+                    height: height * 0.077,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Kcolor.mainColor,
+                        width: 1,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, top: 5),
+                      child: TextField(
+                        // decoration: InputDecoration(
+                        //   enabledBorder: OutlineInputBorder(
+                        //     borderSide: BorderSide(
+                        //         color: Kcolor
+                        //             .mainColor), // Color when not focused
+                        //     borderRadius:
+                        //         BorderRadius.circular(10),
+                        //   ),
+                        // ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: 'Card Number',
+                          labelStyle: TextStyle(
+                            color: Kcolor.mainColor,
+                            fontSize: 14,
+                          ),
+                          hintText: '1234 5678 9012 1234',
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * 0.025,
+                  ),
+                  Container(
+                    height: height * 0.077,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Kcolor.mainColor,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, top: 5),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: 'Card Holder Name',
+                          labelStyle: TextStyle(
+                            color: Kcolor.mainColor,
+                            fontSize: 14,
+                          ),
+                          hintText: 'Omar Ashour',
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * 0.025,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: height * 0.077,
+                        width: width * 0.43,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Kcolor.mainColor,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 5),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              labelText: 'Expiry Date',
+                              labelStyle: TextStyle(
+                                color: Kcolor.mainColor,
+                                fontSize: 14,
+                              ),
+                              hintText: '12/2026',
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: height * 0.077,
+                        width: width * 0.43,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Kcolor.mainColor,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, top: 5),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              labelText: 'CVV',
+                              labelStyle: TextStyle(
+                                color: Kcolor.mainColor,
+                                fontSize: 14,
+                              ),
+                              hintText: '...',
+                              hintStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+
+                        // Show the success bottom sheet after the current one is closed
+                        Future.delayed(Duration(milliseconds: 200), () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) => BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                                child:
+                                    _buildSuccessfullyDialoge(height, cubit)),
+                          );
+                        });
+                      },
+                      child: Container(
+                        height: height * 0.07,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Kcolor.mainColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Add Card',
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ));
+      },
+    );
+  }
+
+  Container _buildSuccessfullyDialoge(double height, SwitchCubit cubit) {
+    return Container(
+      height: height * 0.47,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: cubit.isDarkMode ? Kcolor.black : Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 15.0, left: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: height * 0.02,
+            ),
+            Image.asset('assets/images/tick_1-removebg-preview.png'),
+            SizedBox(
+              height: height * 0.02,
+            ),
+            Text(
+              'Payment Received',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+            Text(
+              'Successfully',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+            Text(
+              'Congratulations 🎉',
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+            ),
+            Text(
+              'Enjoy your class!',
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 15.0),
+              child: GestureDetector(
+                onTap: () {
+                  Get.offAll(BottomNav());
+                },
+                child: Container(
+                  height: height * 0.07,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Kcolor.mainColor,
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Back to Home',
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

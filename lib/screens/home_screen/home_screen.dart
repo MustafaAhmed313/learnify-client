@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/screens/courses/course_detail.dart';
 import 'package:learnify_client/screens/courses/courses_screen.dart';
 import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
 import 'package:learnify_client/screens/home_screen/models/ctegories_model.dart';
 import 'package:learnify_client/screens/home_screen/models/featured_model.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
+import 'package:learnify_client/screens/sign_up_screen/register_cubit.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
@@ -54,6 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final loginCubit = context.read<LoginCubit>();
+    var box = Hive.box('USER_BOX');
+    String? username = box.get('username');
 
     return BlocBuilder<CarouselCubit, CarouselState>(
       builder: (context, state) {
@@ -95,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Welcome 👋',
+                                          'Welcome ${username ?? ""}👋',
                                           style: TextStyle(
                                             color: Color(0xFFFCFCFC),
                                             fontSize: 16,

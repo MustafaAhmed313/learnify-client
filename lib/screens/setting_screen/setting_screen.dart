@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/language_cubit/language_cubit.dart';
 import 'package:learnify_client/screens/change_pass_screen/change_password.dart';
@@ -16,6 +18,7 @@ import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/models/setting_models.dart';
 import 'package:learnify_client/screens/sign_in_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:learnify_client/screens/sign_up_screen/register_cubit.dart';
 
 import '../profile_mentor_screen/profile_mentor_screen.dart';
 
@@ -363,6 +366,12 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   Container _personInfo() {
+    final loginCubit = context.read<LoginCubit>();
+
+    var box = Hive.box('USER_BOX');
+    String? username = box.get('username', defaultValue: loginCubit.username);
+    String? email = box.get('email', defaultValue: "Email not found");
+
     return Container(
       width: 370,
       height: 80,
@@ -405,7 +414,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: SizedBox(
                     width: 232,
                     child: Text(
-                      'example@gmail.com',
+                      '${email ?? ""}',
                       style: TextStyle(
                         color: Color(0xFF92929D),
                         fontSize: 14,
@@ -422,7 +431,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: SizedBox(
                     width: 91.58,
                     child: Text(
-                      'Ahmed',
+                      '${username ?? ""}',
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: 'Poppins',
