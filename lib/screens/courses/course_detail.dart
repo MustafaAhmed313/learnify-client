@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
 import 'package:learnify_client/screens/courses/models/lessons_model.dart';
 import 'package:learnify_client/screens/payment/payment_screen.dart';
+import 'package:learnify_client/screens/profile_mentor_screen/profile_mentor_screen.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
 class CourseDetail extends StatefulWidget {
@@ -138,45 +139,50 @@ class _CourseDetailState extends State<CourseDetail> {
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            radius: width * 0.078,
-                            child: Image.asset(
-                              'assets/images/pngtree-man-avatar-image-for-profile-png-image_13001882.png',
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          SizedBox(
-                            width: width * 0.04,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Johnson mate',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(ProfileMentorScreen());
+                        },
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: width * 0.078,
+                              child: Image.asset(
+                                'assets/images/pngtree-man-avatar-image-for-profile-png-image_13001882.png',
+                                fit: BoxFit.fill,
                               ),
-                              Text('Lead designer')
-                            ],
-                          ),
-                          Spacer(),
-                          Container(
-                            height: height * 0.063,
-                            width: height * 0.063,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Kcolor.mainColor,
                             ),
-                            child: Icon(
-                              Icons.message_outlined,
-                              color: Colors.white,
+                            SizedBox(
+                              width: width * 0.04,
                             ),
-                          )
-                        ],
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Johnson mate',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text('Lead designer')
+                              ],
+                            ),
+                            Spacer(),
+                            Container(
+                              height: height * 0.063,
+                              width: height * 0.063,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Kcolor.mainColor,
+                              ),
+                              child: Icon(
+                                Icons.message_outlined,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: height * 0.013,

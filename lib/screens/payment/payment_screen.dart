@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});

@@ -3,12 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
-import 'package:learnify_client/screens/sign_in_1.dart';
 import 'package:learnify_client/screens/sign_in_screen.dart';
 import 'package:learnify_client/screens/sign_up_screen/register_cubit.dart';
 

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:learnify_client/const/kcolor.dart';
-import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/screens/courses/course_detail.dart';
 import 'package:learnify_client/screens/courses/courses_screen.dart';
 import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
@@ -57,9 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final loginCubit = context.read<LoginCubit>();
+    final loginCubit = context.read<RegisterCubit>();
     var box = Hive.box('USER_BOX');
-    String? username = box.get('username');
+    String? username = box.get('username', defaultValue: loginCubit.user);
 
     return BlocBuilder<CarouselCubit, CarouselState>(
       builder: (context, state) {

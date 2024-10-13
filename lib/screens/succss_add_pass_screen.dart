@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
-import 'package:learnify_client/screens/home_screen/home_screen.dart';
-import 'package:learnify_client/screens/verfi_screen.dart';
+
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
 class SuccssAddPassScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
     return BlocBuilder<SwitchCubit, SwitchState>(
       builder: (context, state) {
         final cubit = context.read<SwitchCubit>();
