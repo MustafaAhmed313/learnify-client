@@ -8,7 +8,6 @@ import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:learnify_client/screens/forget_pass_screen/for_get_pass.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
-import 'package:learnify_client/screens/sign_in_1.dart';
 import 'package:learnify_client/screens/sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
