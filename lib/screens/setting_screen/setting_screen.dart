@@ -19,7 +19,6 @@ import 'package:learnify_client/screens/sign_in_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:learnify_client/screens/sign_up_screen/register_cubit.dart';
 
-
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
 
@@ -367,8 +366,8 @@ class _SettingScreenState extends State<SettingScreen> {
     final loginCubit = context.read<RegisterCubit>();
 
     var box = Hive.box('USER_BOX');
-    String? username = box.get('username', defaultValue: loginCubit.user);
-    String? email = box.get('email', defaultValue: loginCubit.emaill);
+    String? username = box.get('user', defaultValue: loginCubit.username);
+    String? email = box.get('email', defaultValue: loginCubit.email);
 
     return Container(
       width: 370,
@@ -407,7 +406,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: SizedBox(
                     width: 232,
                     child: Text(
-                      '${email ?? ""}',
+                      '${email ?? "example@gmail.com"}',
                       style: TextStyle(
                         color: Color(0xFF92929D),
                         fontSize: 14,
@@ -424,7 +423,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: SizedBox(
                     width: 91.58,
                     child: Text(
-                      '${username ?? ""}',
+                      '${username ?? "guest"}',
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: 'Poppins',

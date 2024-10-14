@@ -42,7 +42,7 @@ class LoginData {
   });
 
   LoginData.fromJson(Map<String, dynamic> json) {
-    name = json['username'];
+    name = json['name'];
     email = json['email'];
     phone = json['phone'];
     password = json['password'];
@@ -53,7 +53,7 @@ class LoginData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['username'] = name;
+    data['name'] = name;
     data['email'] = email;
     data['phone'] = phone;
     data['password'] = password;

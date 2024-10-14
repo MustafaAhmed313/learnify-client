@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/screens/courses/course_detail.dart';
 import 'package:learnify_client/screens/courses/courses_screen.dart';
 import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (query.isNotEmpty) {
       tempList = allFeatured
           .where((item) =>
-              item.description!.toLowerCase().contains(query.toLowerCase()))
+              item.description.toLowerCase().contains(query.toLowerCase()))
           .toList();
     } else {
       tempList = allFeatured;
@@ -58,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final width = MediaQuery.of(context).size.width;
     final loginCubit = context.read<RegisterCubit>();
     var box = Hive.box('USER_BOX');
-    String? username = box.get('username', defaultValue: loginCubit.user);
+    String? username = box.get('user', defaultValue: loginCubit.username);
 
     return BlocBuilder<CarouselCubit, CarouselState>(
       builder: (context, state) {
@@ -308,7 +309,24 @@ class _HomeScreenState extends State<HomeScreen> {
         final switchcubit = context.read<SwitchCubit>();
         return GestureDetector(
           onTap: () {
-            Get.to(CourseDetail());
+            if (model.title == 'Busseniss Managemant')
+          Get.to(
+            CourseDetail(
+              course: FeaturedModel(
+                  title: 'Busseniss Managemant',
+                  description: "Supply Chain Managemant",
+                  image: 'assets/images/R (1).jfif'),
+            ),
+          );
+        else if (model.title == 'UI/UX Design')
+          Get.to(
+            CourseDetail(
+              course: FeaturedModel(
+                  title: 'UI/UX Design',
+                  description: 'User Interface Design Essentials',
+                  image: 'assets/images/R.jfif'),
+            ),
+          );
           },
           child: Container(
             width: width * 0.7,
@@ -328,7 +346,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        image: AssetImage('assets/images/R.jfif'),
+                        image: AssetImage(model.image??''),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -350,7 +368,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding:
                                 const EdgeInsets.only(right: 10.0, left: 10),
                             child: Text(
-                              model.title!,
+                              model.title??'',
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -369,7 +387,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Expanded(
                           child: Text(
-                            model.description!,
+                            model.description??'',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,

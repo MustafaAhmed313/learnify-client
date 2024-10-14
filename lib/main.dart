@@ -12,9 +12,11 @@ import 'package:learnify_client/language_cubit/language_cubit.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 
 import 'package:learnify_client/screens/change_pass_screen/cubit/validate_password_cubit.dart';
+import 'package:learnify_client/screens/favourite/cubit/favourite_cubit.dart';
 
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
 import 'package:learnify_client/screens/home_screen/cubit/carousel_cubit.dart';
+import 'package:learnify_client/screens/home_screen/models/featured_model.dart';
 
 import 'package:learnify_client/screens/profile_mentor_screen/cubit/tab_change_cubit.dart';
 
@@ -49,7 +51,10 @@ void main() async {
     // Otherwise, show the login screen
     initialScreen = const SignInScreen();
   }
+  await Hive.initFlutter(); // Initialize Hive
+  Hive.registerAdapter(FeaturedModelAdapter()); // Register the adapter
 
+  await Hive.openBox('FAV_BOX'); 
   runApp(MyApp(initialScreen: initialScreen));
 }
 
@@ -97,6 +102,9 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         ),
         BlocProvider(
           create: (context) => LanguageCubit(),
+        ),
+          BlocProvider(
+          create: (context) => FavouriteCubit(),
         ),
       ],
       child: BlocBuilder<SwitchCubit, SwitchState>(

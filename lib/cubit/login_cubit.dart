@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:hive/hive.dart';
 import 'package:learnify_client/helpers/dio_helper.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/login_model.dart';
+import 'package:learnify_client/register_model.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:meta/meta.dart';
 
@@ -14,6 +14,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
   LoginModel model = LoginModel();
   String? username;
+
   void login({
     required String email,
     required String password,
@@ -26,11 +27,17 @@ class LoginCubit extends Cubit<LoginState> {
       });
       model = LoginModel.fromJson(response.data);
       if (model.status == true) {
+        // Store user token
         HiveHelper.setToken(model.data?.token ?? "");
         HiveHelper.setValueLoginBox();
-         var box = Hive.box('USER_BOX');
-        box.put('username', model.data?.name); 
+        
+        // Store username and email in Hive box
+        var box = Hive.box('USER_BOX');
+        username = model.data?.name ?? '';  // Store username in the cubit
+        box.put('username', username);      // Save in Hive for persistence
         box.put('email', model.data?.email);
+
+        // Navigate to BottomNav page after successful login
         Get.offAll(const BottomNav());
 
         emit(LoginSuccessState(model.message ?? ""));
