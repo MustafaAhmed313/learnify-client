@@ -386,7 +386,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           context.read<RegisterCubit>().Register(
                                             
                                               phone: _phoneNumberController.text,
-                                              username: _nameController.text,
+                                              name: _nameController.text,
                                               email: _emailController.text,
                                               password:
                                               _userPasswordController.text

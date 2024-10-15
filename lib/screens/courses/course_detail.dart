@@ -1,14 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
 import 'package:learnify_client/screens/courses/models/lessons_model.dart';
+import 'package:learnify_client/screens/favourite/cubit/favourite_cubit.dart';
+import 'package:learnify_client/screens/home_screen/models/featured_model.dart';
 import 'package:learnify_client/screens/payment/payment_screen.dart';
 import 'package:learnify_client/screens/profile_mentor_screen/profile_mentor_screen.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
 class CourseDetail extends StatefulWidget {
-  const CourseDetail({super.key});
+  final FeaturedModel course;
+  const CourseDetail({super.key, required this.course});
 
   @override
   State<CourseDetail> createState() => _CourseDetailState();
@@ -18,11 +22,12 @@ class _CourseDetailState extends State<CourseDetail> {
   bool isExpanded = false;
   final String text =
       'uhoiuh ijoij oijoijoj ijoihjoi ohoihoih hoiqhohw qhdowuhdoq uhqoiuhwdo oihqoihdoq odhqohdoq ohdqoihodhq idhqoiwdoqh udhqouhwdoq oudhqouhdwoqhdo ohdoquhdwoqhwd ohdoqhdohwqod qudoqhdoquhdo qudoqhdoqihd ';
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
+    final course = widget.course;
     return BlocBuilder<SwitchCubit, SwitchState>(
       builder: (context, state) {
         final cubit = context.read<SwitchCubit>();
@@ -39,13 +44,13 @@ class _CourseDetailState extends State<CourseDetail> {
                       bottomRight: Radius.circular(15),
                     ),
                     image: DecorationImage(
-                      image: AssetImage("assets/images/R.jfif"),
+                      image: AssetImage(course.image),
                       fit: BoxFit.fill,
                     ),
                   ),
                   child: Padding(
                     padding: EdgeInsets.only(
-                      top: height * 0.03,
+                      top: height * 0.04,
                       left: width * 0.04,
                       right: width * 0.04,
                     ),
@@ -62,6 +67,21 @@ class _CourseDetailState extends State<CourseDetail> {
                             color: Colors.white,
                           ),
                         ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8, top: 10),
+                          child: GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<FavouriteCubit>()
+                                    .addToFavorites(course);
+                                Get.snackbar('Added',
+                                    '${course.title} added to favorites',
+                                    backgroundColor: Colors.green,
+                                    colorText: Colors.white);
+                              },
+                              child: Icon(Icons.book_outlined)),
+                        )
                       ],
                     ),
                   ),
@@ -77,21 +97,25 @@ class _CourseDetailState extends State<CourseDetail> {
                       Row(
                         children: [
                           Container(
-                            height: height * 0.03,
-                            width: width * 0.25,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7),
-                              color: Kcolor.mainColor,
-                            ),
-                            child: Center(
-                              child: Text(
-                                'UI/UX Design',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(7),
+                                color: Kcolor.mainColor,
                               ),
-                            ),
-                          ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 5, bottom: 5, right: 8, left: 8),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      course.title!,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )),
                           Spacer(),
                           Text(
                             '\$75',
@@ -106,7 +130,7 @@ class _CourseDetailState extends State<CourseDetail> {
                         height: height * 0.01,
                       ),
                       Text(
-                        'User Interface Design Essentials',
+                        course.description!,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
