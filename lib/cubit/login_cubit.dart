@@ -31,9 +31,10 @@ class LoginCubit extends Cubit<LoginState> {
         HiveHelper.setValueLoginBox();
         
         // Store username and email in Hive box
+        username = model.data?.name;
+
         var box = Hive.box('USER_BOX');
-        username = model.data?.name ?? '';  // Store username in the cubit
-        box.put('username', username);      // Save in Hive for persistence
+        box.put('username', username);    // Save in Hive for persistence
         box.put('email', model.data?.email);
 
         // Navigate to BottomNav page after successful login

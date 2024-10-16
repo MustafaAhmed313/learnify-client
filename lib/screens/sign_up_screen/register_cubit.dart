@@ -2,16 +2,16 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:learnify_client/login_model.dart';
 import '../../helpers/dio_helper.dart';
 import '../../helpers/hive_helper.dart';
-import '../../register_model.dart';
 import '../bottomNav/bottom_nav.dart';
 
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
-  RegisterModel model = RegisterModel();
+  LoginModel model = LoginModel();
   
   // Removed duplicate user variables
   String? username;
@@ -31,17 +31,16 @@ class RegisterCubit extends Cubit<RegisterState> {
         "email": email,
         "password": password,
       });
-      model = RegisterModel.fromJson(response.data);
+      model = LoginModel.fromJson(response.data);
       if (model.status == true) {
         HiveHelper.setToken(model.data?.token ?? "");
         HiveHelper.setValueLoginBox();
 
         // Save username and email to Hive with correct keys
-      this.username = model.data?.name; // Set the username here
-        this.email = model.data?.email; // Set the email here
+      username = model.data?.name;
 
         var box = Hive.box('USER_BOX');
-        box.put('user', this.username); // Store the username
+        box.put('username', username);  // Store the username
         box.put('email', this.email); // St
         // Navigate to the BottomNav screen after successful registration
         Get.offAll(const BottomNav());

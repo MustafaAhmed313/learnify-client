@@ -7,6 +7,7 @@ import 'package:learnify_client/screens/courses/models/lessons_model.dart';
 import 'package:learnify_client/screens/favourite/cubit/favourite_cubit.dart';
 import 'package:learnify_client/screens/home_screen/models/featured_model.dart';
 import 'package:learnify_client/screens/payment/payment_screen.dart';
+import 'package:learnify_client/screens/profile_mentor_screen/mentor_chating_screen.dart';
 import 'package:learnify_client/screens/profile_mentor_screen/profile_mentor_screen.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
@@ -163,37 +164,42 @@ class _CourseDetailState extends State<CourseDetail> {
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(ProfileMentorScreen());
-                        },
-                        child: Row(
-                          children: [
-                            CircleAvatar(
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(ProfileMentorScreen());
+                            },
+                            child: CircleAvatar(
                               radius: width * 0.078,
                               child: Image.asset(
                                 'assets/images/pngtree-man-avatar-image-for-profile-png-image_13001882.png',
                                 fit: BoxFit.fill,
                               ),
                             ),
-                            SizedBox(
-                              width: width * 0.04,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Johnson mate',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
+                          ),
+                          SizedBox(
+                            width: width * 0.04,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Johnson mate',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
                                 ),
-                                Text('Lead designer')
-                              ],
-                            ),
-                            Spacer(),
-                            Container(
+                              ),
+                              Text('Lead designer')
+                            ],
+                          ),
+                          Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(MentorChatingScreen());
+                            },
+                            child: Container(
                               height: height * 0.063,
                               width: height * 0.063,
                               decoration: BoxDecoration(
@@ -204,9 +210,9 @@ class _CourseDetailState extends State<CourseDetail> {
                                 Icons.message_outlined,
                                 color: Colors.white,
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                          )
+                        ],
                       ),
                       SizedBox(
                         height: height * 0.013,

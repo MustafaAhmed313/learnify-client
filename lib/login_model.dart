@@ -1,20 +1,20 @@
 class LoginModel {
   bool? status;
   String? message;
-  LoginData? data;
+  LoginDatat? data;
 
   LoginModel({this.status, this.message, this.data});
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? LoginData.fromJson(json['data']) : null;
+    data = json['data'] != null ? new LoginDatat.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['message'] = this.message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -22,44 +22,47 @@ class LoginModel {
   }
 }
 
-class LoginData {
-  String? id;
+class LoginDatat {
+  int? id;
   String? name;
   String? email;
   String? phone;
-  String? password;
-  String? otp;
+  String? image;
+  int? points;
+  int? credit;
   String? token;
 
-  LoginData({
-    this.id,
-    this.name,
-    this.email,
-    this.phone,
-    this.password,
-    this.otp,
-    this.token
-  });
+  LoginDatat(
+      {this.id,
+      this.name,
+      this.email,
+      this.phone,
+      this.image,
+      this.points,
+      this.credit,
+      this.token});
 
-  LoginData.fromJson(Map<String, dynamic> json) {
+  LoginDatat.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
-    password = json['password'];
-    id = json['_id'];
-    otp = json['otp'];
+    image = json['image'];
+    points = json['points'];
+    credit = json['credit'];
     token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['email'] = email;
-    data['phone'] = phone;
-    data['password'] = password;
-    data['_id'] = id;
-    data['token'] = token;
-    data['otp'] = otp;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['phone'] = this.phone;
+    data['image'] = this.image;
+    data['points'] = this.points;
+    data['credit'] = this.credit;
+    data['token'] = this.token;
     return data;
   }
 }
