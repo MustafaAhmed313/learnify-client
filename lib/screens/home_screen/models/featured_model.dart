@@ -5,16 +5,15 @@ part 'featured_model.g.dart'; // This will be generated
 @HiveType(typeId: 0) // Specify a unique typeId for each model class.
 class FeaturedModel {
   @HiveField(0)
-  final String title;
+   String? title;
 
   @HiveField(1)
-  final String description;
+   String? description;
   @HiveField(2)
-  final String image;
+   String? image;
   // Add any other fields that you have in FeaturedModel.
 
-  FeaturedModel(
-      {required this.title, required this.description, required this.image});
+  FeaturedModel({this.title, this.description, this.image});
 }
 
 List<FeaturedModel> featuredModel = [

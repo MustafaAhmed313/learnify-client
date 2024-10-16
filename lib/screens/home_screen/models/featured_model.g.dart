@@ -24,13 +24,15 @@ class FeaturedModelAdapter extends TypeAdapter<FeaturedModel> {
   }
 
   @override
-  void write(BinaryWriter writer, FeaturedModel obj) {
+ void write(BinaryWriter writer, FeaturedModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3) // Updated to 3 fields
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
-      ..write(obj.description);
+      ..write(obj.description)
+      ..writeByte(2) // Write the third field (image)
+      ..write(obj.image); // Write the image field
   }
 
   @override

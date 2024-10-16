@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:learnify_client/helpers/dio_helper.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/login_model.dart';
-import 'package:learnify_client/register_model.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 import 'package:meta/meta.dart';
 
