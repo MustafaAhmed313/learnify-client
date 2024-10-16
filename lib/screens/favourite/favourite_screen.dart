@@ -117,7 +117,7 @@ class FavouriteScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         image: DecorationImage(
-                                          image: AssetImage(course.image ?? ''),
+                                          image: AssetImage(course.image!),
                                           fit: BoxFit.fill,
                                         ),
                                       ),
@@ -139,8 +139,7 @@ class FavouriteScreen extends StatelessWidget {
                                                 vertical: 3,
                                               ),
                                               child: Text(
-                                                course.title ??
-                                                    '', // عرض عنوان الكورس
+                                                course.title !, // عرض عنوان الكورس
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ),
@@ -158,8 +157,7 @@ class FavouriteScreen extends StatelessWidget {
                                         children: [
                                           Expanded(
                                             child: Text(
-                                              course.description ??
-                                                  '', // عرض وصف الكورس
+                                              course.description!, // عرض وصف الكورس
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 16,

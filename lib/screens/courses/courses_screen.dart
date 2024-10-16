@@ -98,7 +98,7 @@ class CoursesScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: AssetImage(model.image??""),
+                    image: AssetImage(model.image!),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -119,7 +119,7 @@ class CoursesScreen extends StatelessWidget {
                         padding: EdgeInsets.only(
                             left: 5, right: 5, top: 3, bottom: 3),
                         child: Text(
-                          model.title??'',
+                          model.title!,
                           style: TextStyle(
                             color: Colors.white,
                           ),
@@ -138,7 +138,7 @@ class CoursesScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        model.description??'',
+                        model.description!,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,

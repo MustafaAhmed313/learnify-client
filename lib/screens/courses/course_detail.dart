@@ -44,7 +44,7 @@ class _CourseDetailState extends State<CourseDetail> {
                       bottomRight: Radius.circular(15),
                     ),
                     image: DecorationImage(
-                      image: AssetImage(course.image),
+                      image: AssetImage(course.image!),
                       fit: BoxFit.fill,
                     ),
                   ),
