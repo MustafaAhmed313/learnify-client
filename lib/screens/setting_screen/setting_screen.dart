@@ -392,7 +392,7 @@ class _SettingScreenState extends State<SettingScreen> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
               image: const DecorationImage(
-                  image: AssetImage('assets/images/avatar.jpeg'),
+                  image: AssetImage('assets/images/OIP.jfif'),
                   fit: BoxFit.cover),
             ),
           ),

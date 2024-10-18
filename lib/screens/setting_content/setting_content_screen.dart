@@ -2,12 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/screens/about_us_screen/about_us.dart';
 import 'package:learnify_client/screens/manage_notification_screen/manage_notification.dart';
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_content/models/setting_content_model.dart';
 import 'package:learnify_client/screens/setting_content/widget/rate_dialog.dart';
+import 'package:learnify_client/screens/sign_up_screen/register_cubit.dart';
 
 import '../profile_mentor_screen/profile_mentor_screen.dart';
 
@@ -55,7 +58,7 @@ class SettingContentScreen extends StatelessWidget {
           ),
           body: Column(
             children: [
-              _personInfo(),
+              _personInfo(context),
               Expanded(
                 child: ListView.separated(
                   padding: EdgeInsets.only(top: 10),
@@ -168,7 +171,13 @@ class SettingContentScreen extends StatelessWidget {
     );
   }
 
-  Padding _personInfo() {
+  Padding _personInfo(BuildContext context) {
+    final registerCubit = context.read<RegisterCubit>();
+
+    final loginCubit = context.read<LoginCubit>();
+    var box = Hive.box('USER_BOX');
+    String? username = box.get('username', defaultValue: loginCubit.username);
+    String? email = box.get('email', defaultValue: registerCubit.email);
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
       child: Container(
@@ -195,12 +204,10 @@ class SettingContentScreen extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 decoration: ShapeDecoration(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)
-                  ),
+                      borderRadius: BorderRadius.circular(8)),
                   image: const DecorationImage(
-                      image: AssetImage('assets/images/avatar.jpeg'),
-                      fit: BoxFit.cover
-                  ),
+                      image: AssetImage('assets/images/OIP.jfif'),
+                      fit: BoxFit.cover),
                 ),
               ),
             ),
@@ -215,7 +222,7 @@ class SettingContentScreen extends StatelessWidget {
                     child: SizedBox(
                       width: 232,
                       child: Text(
-                        'example@gmail.com',
+                        '${email ?? ''}',
                         style: TextStyle(
                           color: Color(0xFF92929D),
                           fontSize: 14,
@@ -232,7 +239,7 @@ class SettingContentScreen extends StatelessWidget {
                     child: SizedBox(
                       width: 91.58,
                       child: Text(
-                        'Ahmed',
+                        '${username ?? ''}',
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'Poppins',
