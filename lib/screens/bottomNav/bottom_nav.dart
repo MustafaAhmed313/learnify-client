@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/screens/courses/course_detail.dart';
+import 'package:learnify_client/screens/courses_screen.dart';
 import 'package:learnify_client/screens/favourite/favourite_screen.dart';
 import 'package:learnify_client/screens/home_screen/home_screen.dart';
 import 'package:learnify_client/screens/setting_screen/setting_screen.dart';
@@ -17,11 +19,7 @@ class _BottomNavState extends State<BottomNav> {
 
   List<Widget> screens = [
     HomeScreen(),
-    Center(
-        child: Text(
-      'Courses',
-      style: TextStyle(fontSize: 50),
-    )),
+    CoursesScreen1(),
     FavouriteScreen(),
     SettingScreen(),
   ];

@@ -12,8 +12,6 @@ import 'package:learnify_client/language_cubit/language_cubit.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
 
 import 'package:learnify_client/screens/change_pass_screen/cubit/validate_password_cubit.dart';
-import 'package:learnify_client/screens/courses/courses_screen.dart';
-import 'package:learnify_client/screens/courses_screen.dart';
 import 'package:learnify_client/screens/favourite/cubit/favourite_cubit.dart';
 
 import 'package:learnify_client/screens/help_center/cubit/help_center_cubit.dart';
@@ -25,6 +23,7 @@ import 'package:learnify_client/screens/profile_mentor_screen/cubit/tab_change_c
 import 'package:learnify_client/screens/setting_content/cubit/setting_content_cubit.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 import 'package:learnify_client/screens/sign_in_screen.dart';
+
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:learnify_client/screens/sign_up_screen/register_cubit.dart';
@@ -55,7 +54,7 @@ void main() async {
   await Hive.initFlutter(); // Initialize Hive
   Hive.registerAdapter(FeaturedModelAdapter()); // Register the adapter
 
-  await Hive.openBox('FAV_BOX');
+  await Hive.openBox('FAV_BOX'); 
   runApp(MyApp(initialScreen: initialScreen));
 }
 
@@ -104,7 +103,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         BlocProvider(
           create: (context) => LanguageCubit(),
         ),
-        BlocProvider(
+          BlocProvider(
           create: (context) => FavouriteCubit(),
         ),
       ],
@@ -122,7 +121,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
                 darkTheme: darkTheme, // Dark theme
                 themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 // home: widget.initialScreen,
-                home: CoursesScreen1(),
+                home: SplashScreen(),
               );
             },
           );
