@@ -369,7 +369,7 @@ class _SettingScreenState extends State<SettingScreen> {
     final loginCubit = context.read<LoginCubit>();
     var box = Hive.box('USER_BOX');
     String? username = box.get('username', defaultValue: loginCubit.username);
-    String? email = box.get('email', defaultValue: registerCubit.email);
+    String? email = box.get('email', defaultValue: registerCubit.emaill);
     return Container(
       width: 370,
       height: 80,

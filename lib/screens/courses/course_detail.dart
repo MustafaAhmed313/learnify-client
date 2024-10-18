@@ -22,7 +22,7 @@ class CourseDetail extends StatefulWidget {
 class _CourseDetailState extends State<CourseDetail> {
   bool isExpanded = false;
   final String text =
-      'uhoiuh ijoij oijoijoj ijoihjoi ohoihoih hoiqhohw qhdowuhdoq uhqoiuhwdo oihqoihdoq odhqohdoq ohdqoihodhq idhqoiwdoqh udhqouhwdoq oudhqouhdwoqhdo ohdoquhdwoqhwd ohdoqhdohwqod qudoqhdoquhdo qudoqhdoqihd ';
+      'Product Designers are responsible for coming up with new product designs that meet the needs and wants of consumers. They will have many duties, such as creating design concepts, drawing ideas to determine Product Designers are responsible for coming up with new product designs that meet the needs and wants of consumers. They will have many duties, such as creating design concepts, drawing ideas to determine ';
 
   @override
   Widget build(BuildContext context) {
@@ -283,7 +283,25 @@ class _CourseDetailState extends State<CourseDetail> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.to(PaymentScreen());
+                          if (course.title == 'Busseniss Managemant')
+                            Get.to(
+                              PaymentScreen(
+                                course: FeaturedModel(
+                                    title: 'Busseniss Managemant',
+                                    description: "Supply Chain Managemant",
+                                    image: 'assets/images/R (1).jfif'),
+                              ),
+                            );
+                          else if (course.title == 'UI/UX Design')
+                            Get.to(
+                              PaymentScreen(
+                                course: FeaturedModel(
+                                    title: 'UI/UX Design',
+                                    description:
+                                        'User Interface Design Essentials',
+                                    image: 'assets/images/R.jfif'),
+                              ),
+                            );
                         },
                         child: Container(
                           height: height * 0.07,

@@ -1,378 +1,240 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:learnify_client/const/kcolor.dart';
 import 'package:learnify_client/screens/courses/course_detail.dart';
+import 'package:learnify_client/screens/courses/cubit/courses_cubit.dart';
 import 'package:learnify_client/screens/home_screen/models/featured_model.dart';
+import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
 class CoursesScreen1 extends StatefulWidget {
   const CoursesScreen1({super.key});
 
   @override
-  _CoursesScreen1State createState() => _CoursesScreen1State();
+  State<CoursesScreen1> createState() => _CoursesScreen1State();
 }
 
 class _CoursesScreen1State extends State<CoursesScreen1> {
-  // List to hold the courses
-  List<Map<String, dynamic>> courses = [
-    {
-      'imagePath': 'assets/images/R.jfif',
-      'courseTitle': 'UI/UX Design',
-      'courseDescription': 'User Interface Design Essentials',
-      'lessonsInfo': '5/10 ',
-      'progress': 0.6,
-    },
-    {
-      'imagePath': 'assets/images/R (1).jfif',
-      'courseTitle': 'Business Management',
-      'courseDescription': 'Supply Chain Management',
-      'lessonsInfo': '8/12 ',
-      'progress': 0.8,
-    },
-    {
-      'imagePath': 'assets/images/R (1).jfif',
-      'courseTitle': 'UI/UX Design',
-      'courseDescription': 'User Research And Design',
-      'lessonsInfo': '3/10 ',
-      'progress': 0.3,
-    },
-  ];
-
-  // Function to extract and calculate progress based on lessons info
-  double calculateProgress(String lessonsInfo) {
-    List<String> parts = lessonsInfo.split('/'); // Split "X/Y Lessons"
-    int completedLessons = int.parse(parts[0]); // Extract X
-    int totalLessons = int.parse(parts[1].split(' ')[0]); // Extract Y
-    return completedLessons / totalLessons; // Calculate progress as a ratio
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // Recalculate progress for each course when the screen is first loaded
-    for (var course in courses) {
-      course['progress'] = calculateProgress(course['lessonsInfo']);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    // الحصول على قائمة الكورسات المفضلة من خلال Cubit
+    final favoriteCourses = context.watch<CoursesCubit>().getCourses();
 
-    // Determine colors based on theme
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final cardColor = isDarkMode ? Colors.white : Colors.white;
-    final textColor =
-        isDarkMode ? Colors.white : Colors.black; // Declare textColor here
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text("My Courses")),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: Column(
-            children: [
-              SizedBox(height: screenHeight * .02),
-              ...courses.asMap().entries.map((entry) {
-                final index = entry.key;
-                final course = entry.value;
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: buildCourseCard(
-                    context,
-                    imagePath: course['imagePath'],
-                    courseTitle: course['courseTitle'],
-                    courseDescription: course['courseDescription'],
-                    lessonsInfo: course['lessonsInfo'],
-                    progress: course['progress'],
-                    onDelete: () {
-                      showDeleteDialog(
-                          context, index); // Show confirmation dialog
-                    },
-                    onLessonsInfoChanged: (newLessonsInfo) {
-                      setState(() {
-                        course['lessonsInfo'] = newLessonsInfo;
-                        course['progress'] = calculateProgress(newLessonsInfo);
-                      });
-                    },
-                    textColor: textColor, // Pass textColor to the method
-                  ),
-                );
-              }).toList(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildCourseCard(
-    BuildContext context, {
-    required String imagePath,
-    required String courseTitle,
-    required String courseDescription,
-    required String lessonsInfo,
-    required double progress,
-    required VoidCallback onDelete,
-    required Function(String) onLessonsInfoChanged,
-    required Color textColor,
-  }) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
-    return GestureDetector(
-      onTap: () {
-        // Navigate to CourseDetail screen
-        Get.to(
-          CourseDetail(
-            course: FeaturedModel(
-              title: courseTitle,
-              description: courseDescription,
-              image: imagePath,
-            ),
-          ),
-        );
-      },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          color: isDarkMode
-              ? Colors.grey[850]
-              : Colors.white, // Card color based on theme
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: Image.asset(
-                        imagePath,
-                        height: 150,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 10,
-                    top: 10,
-                    child: GestureDetector(
-                      onTap: onDelete,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.red.withOpacity(0.7),
-                          shape: BoxShape.circle,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: Icon(
-                          Icons.delete,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    color: Colors.blue,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 5.0,
-                      horizontal: 8.0,
-                    ),
-                    child: Text(
-                      courseTitle,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 8.0),
-                child: Text(
-                  courseDescription,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Editable text field for lessonsInfo
-                    Row(
-                      children: [
-                        Text(
-                          "Lessons: ",
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: textColor,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 80,
-                          child: TextField(
-                            onSubmitted: (newValue) {
-                              onLessonsInfoChanged(newValue);
-                            },
-                            style: TextStyle(
-                              color: textColor,
-                            ),
-                            controller: TextEditingController(
-                              text: lessonsInfo,
-                            ),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              isDense: true,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "${(progress * 100).toInt()}%",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: textColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    thumbShape: RoundSliderThumbShape(
-                      enabledThumbRadius: 10,
-                    ),
-                    trackHeight: 6,
-                    activeTrackColor: const Color.fromRGBO(33, 150, 243, 1),
-                    inactiveTrackColor: Colors.grey[300],
-                    thumbColor: const Color.fromRGBO(33, 150, 243, 1),
-                    overlayShape: RoundSliderOverlayShape(
-                      overlayRadius: 15,
-                    ),
-                  ),
-                  child: Slider(
-                    value: progress,
-                    min: 0.0,
-                    max: 1.0,
-                    onChanged: (newValue) {
-                      setState(() {
-                        // Update progress
-                      });
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  // Function to show course details when card is tapped
-  void showCourseDetails(
-      BuildContext context, String courseTitle, String courseDescription) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(courseTitle),
-          content: Text(courseDescription),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text("Close"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  // Function to show confirmation dialog
-  void showDeleteDialog(BuildContext context, int index) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          contentPadding: const EdgeInsets.all(20),
-          title: Center(
-            child: Column(
-              children: [
-                Icon(Icons.delete, size: 40, color: Colors.red),
-                SizedBox(height: 10),
-                Text(
-                  "Are You Sure Want to Delete this Course?",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          content: Text(
-            "You still can redownload again without payment.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.white,
-            ),
-          ),
-          actionsAlignment: MainAxisAlignment.spaceEvenly,
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
+    return BlocBuilder<SwitchCubit, SwitchState>(
+      builder: (context, state) {
+        final cubit = context.read<SwitchCubit>();
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Center(
               child: Text(
-                "Cancel",
-                style: TextStyle(color: Colors.grey),
+                'My Courses',
               ),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+          ),
+          body: favoriteCourses.isEmpty
+              ? Center(
+                  child: Text("No Courses added yet!"),
+                )
+              : ListView.separated(
+                  padding:
+                      EdgeInsets.only(top: 16, bottom: 16, right: 20, left: 20),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final course = favoriteCourses[index];
+
+                    return BlocBuilder<CoursesCubit, CoursesState>(
+                      builder: (context, state) {
+                        final favcubit = context.read<CoursesCubit>();
+                        return GestureDetector(
+                          onTap: () {
+                            // if (course.title == 'Busseniss Managemant')
+                            //   Get.to(
+                            //     CourseDetail(
+                            //       course: FeaturedModel(
+                            //           title: 'Busseniss Managemant',
+                            //           description: "Supply Chain Managemant",
+                            //           image: 'assets/images/R (1).jfif'),
+                            //     ),
+                            //   );
+                            // else if (course.title == 'UI/UX Design')
+                            //   Get.to(
+                            //     CourseDetail(
+                            //       course: FeaturedModel(
+                            //           title: 'UI/UX Design',
+                            //           description:
+                            //               'User Interface Design Essentials',
+                            //           image: 'assets/images/R.jfif'),
+                            //     ),
+                            //   );
+                          },
+                          child: Dismissible(
+                            key: ValueKey(favoriteCourses[index]),
+                            direction: DismissDirection.endToStart,
+                            background: Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Container(
+                                height: height * 0.36,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.red,
+                                ),
+                                alignment: Alignment.centerRight,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            onDismissed: (direction) {
+                              favcubit.deleteCourses(course);
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text('Course removed'),
+                              ));
+                            },
+                            child: Container(
+                              height: height * 0.39,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: cubit.isDarkMode
+                                    ? Colors.black
+                                    : Colors.white,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  top: height * 0.02,
+                                  right: width * 0.05,
+                                  left: width * 0.05,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: height * 0.2,
+                                      width: width * 0.8,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                          image: AssetImage(course.image!),
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: height * 0.01),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            color: Kcolor.mainColor,
+                                          ),
+                                          child: Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 5,
+                                                vertical: 3,
+                                              ),
+                                              child: Text(
+                                                course
+                                                    .title!, // عرض عنوان الكورس
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: height * 0.01),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.only(right: width * 0.05),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              course
+                                                  .description!, // عرض وصف الكورس
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16,
+                                              ),
+                                              overflow: TextOverflow.visible,
+                                              softWrap: true,
+                                              maxLines: 2,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: height * 0.007),
+                                    Row(
+                                      children: [
+                                        Text(course.title == 'UI/UX Design'
+                                            ? '8/12 Lessons'
+                                            : '3/10 Lessons'),
+                                        Spacer(),
+                                        Text(course.title == 'UI/UX Design'
+                                            ? '80%'
+                                            : '30%')
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    SliderTheme(
+                                      data: SliderTheme.of(context).copyWith(
+                                        thumbShape: RoundSliderThumbShape(
+                                          enabledThumbRadius: 10,
+                                        ),
+                                        trackHeight: 6,
+                                        activeTrackColor: Kcolor.mainColor,
+                                        inactiveTrackColor: Colors.grey[300],
+                                        thumbColor: Kcolor.mainColor,
+                                        overlayShape: RoundSliderOverlayShape(
+                                          overlayRadius: 15,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 5),
+                                        child: Slider(
+                                          value: course.title ==
+                                                  'Busseniss Managemant'
+                                              ? 0.3
+                                              : 0.6,
+                                          min: 0.0,
+                                          max: 1.0,
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              // Update progress
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
+                      SizedBox(height: height * 0.02),
+                  itemCount: favoriteCourses.length,
                 ),
-              ),
-              onPressed: () {
-                setState(() {
-                  courses.removeAt(index); // Remove the course
-                });
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text("Delete"),
-            ),
-          ],
         );
       },
     );

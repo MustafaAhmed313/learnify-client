@@ -13,6 +13,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
   LoginModel model = LoginModel();
   String? username;
+  String? emaill;
 
   void login({
     required String email,
@@ -29,13 +30,14 @@ class LoginCubit extends Cubit<LoginState> {
         // Store user token
         HiveHelper.setToken(model.data?.token ?? "");
         HiveHelper.setValueLoginBox();
-        
+
         // Store username and email in Hive box
         username = model.data?.name;
+        emaill = model.data?.email;
 
         var box = Hive.box('USER_BOX');
-        box.put('username', username);    // Save in Hive for persistence
-        box.put('email', model.data?.email);
+        box.put('username', username); // Save in Hive for persistence
+        box.put('email', emaill);
 
         // Navigate to BottomNav page after successful login
         Get.offAll(const BottomNav());

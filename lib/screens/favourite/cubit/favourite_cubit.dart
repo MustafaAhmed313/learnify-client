@@ -34,7 +34,6 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     }
   }
 
-  // دالة لاسترجاع المفضلة
   List<FeaturedModel> getFavorites() {
     final List<dynamic> rawFavorites = Hive.box(favbox).get(favkey, defaultValue: <dynamic>[]);
 
