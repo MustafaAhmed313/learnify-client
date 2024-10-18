@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:learnify_client/const/kcolor.dart';
+import 'package:learnify_client/cubit/login_cubit.dart';
 import 'package:learnify_client/helpers/hive_helper.dart';
 import 'package:learnify_client/language_cubit/language_cubit.dart';
 import 'package:learnify_client/screens/change_pass_screen/change_password.dart';
@@ -363,12 +364,12 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   Container _personInfo() {
-    final loginCubit = context.read<RegisterCubit>();
+    final registerCubit = context.read<RegisterCubit>();
 
+    final loginCubit = context.read<LoginCubit>();
     var box = Hive.box('USER_BOX');
-    String? username = box.get('user', defaultValue: loginCubit.username);
-    String? email = box.get('email', defaultValue: loginCubit.email);
-
+    String? username = box.get('username', defaultValue: loginCubit.username);
+    String? email = box.get('email', defaultValue: registerCubit.email);
     return Container(
       width: 370,
       height: 80,
@@ -391,7 +392,7 @@ class _SettingScreenState extends State<SettingScreen> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
               image: const DecorationImage(
-                  image: AssetImage('assets/images/avatar.jpeg'),
+                  image: AssetImage('assets/images/OIP.jfif'),
                   fit: BoxFit.cover),
             ),
           ),

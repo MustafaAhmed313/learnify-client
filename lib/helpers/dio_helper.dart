@@ -10,7 +10,7 @@ class DioHelper {
       BaseOptions(
           baseUrl: 'https://student.valuxapps.com/api/',
           receiveTimeout: const Duration(seconds: 120),
-          headers: {"lang": "ar", "Content-Type": "application/json"}),
+          headers: {"lang": "en", "Content-Type": "application/json"}),
     );
   }
 
@@ -29,7 +29,7 @@ class DioHelper {
     return response;
   }
 
-    //-------------------post-----------------------//
+  //-------------------post-----------------------//
 
   static Future<Response> postData({
     required String path,
@@ -44,8 +44,7 @@ class DioHelper {
     return response;
   }
 
-
-    //-------------------Delete-----------------------//
+  //-------------------Delete-----------------------//
 
   static Future<Response> deleteData({
     required String path,
@@ -60,8 +59,7 @@ class DioHelper {
     return response;
   }
 
-
-    //-------------------Patch-----------------------//
+  //-------------------Patch-----------------------//
 
   static Future<Response> patchData({
     required String path,
@@ -76,8 +74,7 @@ class DioHelper {
     return response;
   }
 
-
-    //-------------------Put-----------------------//
+  //-------------------Put-----------------------//
 
   static Future<Response> putData({
     required String path,
