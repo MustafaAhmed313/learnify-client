@@ -6,10 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:learnify_client/const/kcolor.dart';
 import 'package:learnify_client/screens/bottomNav/bottom_nav.dart';
+import 'package:learnify_client/screens/courses/cubit/courses_cubit.dart';
+import 'package:learnify_client/screens/home_screen/models/featured_model.dart';
 import 'package:learnify_client/screens/setting_screen/cubit/switch_cubit.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+  final FeaturedModel course;
+
+  const PaymentScreen({super.key, required this.course});
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -19,11 +23,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
   String _selectedCard = 'Master Card';
   int itemTotal = 75;
   int discount = 2;
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final course = widget.course;
 
     return BlocBuilder<SwitchCubit, SwitchState>(
       builder: (context, state) {
@@ -62,7 +66,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
-                              image: AssetImage('assets/images/R.jfif'),
+                              image: AssetImage(course.image!),
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -87,11 +91,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         padding: EdgeInsets.only(
                                             left: width * 0.02,
                                             right: width * 0.02,
-                                            top: height * 0.003,
-                                            bottom: height * 0.003),
+                                            top: height * 0.005,
+                                            bottom: height * 0.005),
                                         child: Text(
-                                          'UI/UX Design',
-                                          style: TextStyle(color: Colors.white),
+                                          course.title!,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -100,9 +106,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               ),
                               Spacer(),
                               Padding(
-                                padding: EdgeInsets.only(right: width * 0.1),
+                                padding: EdgeInsets.only(right: width * 0.2),
                                 child: Text(
-                                  'User Interface Design Essentials',
+                                  course.description!,
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                   softWrap: true,
                                   overflow: TextOverflow.visible,
@@ -275,19 +281,37 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15.0),
-                  child: Container(
-                    height: height * 0.07,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Kcolor.mainColor,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Pay Now',
-                        style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      if (_selectedCard == 'Paypal') {
+                        context.read<CoursesCubit>().addToCourses(course);
+                        Get.snackbar('Added',
+                            '${course.title} has been added to your courses',
+                            backgroundColor: Colors.green,
+                            colorText: Colors.white);
+                      } else {
+                        Get.snackbar(
+                          'Error',
+                          'Please select PayPal as the payment method',
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white,
+                        );
+                      }
+                    },
+                    child: Container(
+                      height: height * 0.07,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Kcolor.mainColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Pay Now',
+                          style: TextStyle(
+                            fontSize: 17,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -302,6 +326,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   Widget _buildBottomDialogSheet(double height, double width) {
+    final course = widget.course;
+
     return BlocBuilder<SwitchCubit, SwitchState>(
       builder: (context, state) {
         final cubit = context.read<SwitchCubit>();
@@ -479,7 +505,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
-
+                        context.read<CoursesCubit>().addToCourses(course);
                         // Show the success bottom sheet after the current one is closed
                         Future.delayed(Duration(milliseconds: 200), () {
                           showModalBottomSheet(

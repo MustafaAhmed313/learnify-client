@@ -15,7 +15,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   
   // Removed duplicate user variables
   String? username;
-  String? email;
+  String? emaill;
 
   void Register({
     required String email,
@@ -37,11 +37,12 @@ class RegisterCubit extends Cubit<RegisterState> {
         HiveHelper.setValueLoginBox();
 
         // Save username and email to Hive with correct keys
-      username = model.data?.name;
+        username = model.data?.name;
+        emaill = model.data?.email;
 
         var box = Hive.box('USER_BOX');
-        box.put('username', username);  // Store the username
-        box.put('email', this.email); // St
+        box.put('username', username); // Save in Hive for persistence
+        box.put('email', emaill); // St
         // Navigate to the BottomNav screen after successful registration
         Get.offAll(const BottomNav());
 

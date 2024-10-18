@@ -177,7 +177,7 @@ class SettingContentScreen extends StatelessWidget {
     final loginCubit = context.read<LoginCubit>();
     var box = Hive.box('USER_BOX');
     String? username = box.get('username', defaultValue: loginCubit.username);
-    String? email = box.get('email', defaultValue: registerCubit.email);
+    String? email = box.get('email', defaultValue: registerCubit.emaill);
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
       child: Container(
@@ -222,7 +222,7 @@ class SettingContentScreen extends StatelessWidget {
                     child: SizedBox(
                       width: 232,
                       child: Text(
-                        '${email ?? ''}',
+                        '${email ?? 'example@gmail.com'}',
                         style: TextStyle(
                           color: Color(0xFF92929D),
                           fontSize: 14,
@@ -239,7 +239,7 @@ class SettingContentScreen extends StatelessWidget {
                     child: SizedBox(
                       width: 91.58,
                       child: Text(
-                        '${username ?? ''}',
+                        '${username ?? 'guest'}',
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'Poppins',
